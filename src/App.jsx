@@ -8,13 +8,13 @@ import {
   Clock, MapPin, ShieldCheck, Info, Magnet, Building2, Star, Printer, FileText, HelpCircle
 } from 'lucide-react';
 
+// --- DATA CONFIGURATION ---
 const COLORS = {
   navy: '#1e3a8a', emerald: '#0d9488', orange: '#f97316',
   purple: '#a855f7', blue: '#3b82f6', slate100: '#f1f5f9',
   slate500: '#64748b', slate700: '#334155'
 };
 
-// --- DATA SETS ---
 const sourcingData = [
   { name: 'Applied', '2025': 55.0, '2024': 34.7 },
   { name: 'Referral', '2025': 33.8, '2024': 30.7 },
@@ -46,15 +46,9 @@ const top3_2025 = [
   { name: "Ben-Gurion Uni", value: 11.3 }
 ];
 
-const top3_2024 = [
-  { name: "Technion", value: 16.0 },
-  { name: "Tel-Aviv Uni", value: 14.7 },
-  { name: "Hebrew Uni", value: 9.3 }
-];
-
 const genderData = [
-  { name: 'Male', value: 80, color: COLORS.navy },
-  { name: 'Female', value: 20, color: COLORS.orange }
+  { name: 'זכר (Male)', value: 80, color: COLORS.navy },
+  { name: 'נקבה (Female)', value: 20, color: COLORS.orange }
 ];
 
 const ageData = [
@@ -63,17 +57,17 @@ const ageData = [
 ];
 
 const seniorityData = [
-  { name: '0-1 Y', value: 21.3 }, { name: '1-3 Y', value: 16.3 },
-  { name: '3-5 Y', value: 12.5 }, { name: '5+ Y', value: 50.0 }
+  { name: '0-1 Year', value: 21.3 }, { name: '1-3 Years', value: 16.3 },
+  { name: '3-5 Years', value: 12.5 }, { name: '5+ Years', value: 50.0 }
 ];
 
-// --- COMPONENTS ---
-const SafeLabel = (props) => {
+// --- SUB-COMPONENTS ---
+const CustomLabel = (props) => {
   const { x, y, width, value } = props;
-  if (value === null || value === undefined) return null;
+  if (value === undefined) return null;
   return (
     <text x={x + width / 2} y={y - 10} fill={COLORS.slate700} textAnchor="middle" fontSize={8} fontWeight="900">
-      {typeof value === 'number' ? value.toFixed(1) : value}%
+      {`${value.toFixed(1)}%`}
     </text>
   );
 };
@@ -105,61 +99,73 @@ const App = () => {
       </button>
 
       <div className="max-w-6xl mx-auto">
-        <header className="mb-10 flex flex-col md:flex-row justify-between items-start gap-4">
+        <header className="mb-10 flex flex-col md:flex-row justify-between items-start gap-4 text-left">
           <div className="text-left">
             <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-widest mb-3">
-              <ShieldCheck size={18} /> <span>Audited Recruitment Analytics 2025</span>
+              <ShieldCheck size={18} /> <span>Audited Recruitment Analytics Summary 2025</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-[#1e3a8a] mb-2 tracking-tight leading-tight">Executive Summary</h1>
-            <p className="text-lg text-slate-500 font-medium max-w-2xl leading-relaxed">Comprehensive overview of talent acquisition landscape and workforce DNA evolution.</p>
+            <h1 className="text-5xl md:text-6xl font-extrabold text-[#1e3a8a] mb-2 tracking-tight">Executive Summary</h1>
+            <p className="text-lg text-slate-500 font-medium max-w-2xl leading-relaxed">A comprehensive overview of our talent acquisition landscape and workforce DNA evolution.</p>
           </div>
-          <button onClick={handlePrint} className="print-hidden bg-white border-2 border-blue-900 text-blue-900 px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-slate-50">
+          <button onClick={handlePrint} className="print-hidden bg-white border-2 border-blue-900 text-blue-900 px-5 py-2.5 rounded-xl font-bold flex items-center gap-2">
             <FileText size={18} /> Export Report
           </button>
         </header>
 
-        {/* STRATEGIC HIGHLIGHTS */}
+        {/* HIGHLIGHTS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16 text-black">
-          <Card className="border-t-4 border-blue-900"><Magnet size={36} className="text-blue-900 mb-6"/><h3 className="text-lg font-bold">Brand Pull: 55%</h3><p className="text-xs text-slate-700">Direct applications reached 55%.</p></Card>
-          <Card className="border-t-4 border-orange-500"><Zap size={36} className="text-orange-500 mb-6"/><h3 className="text-lg font-bold">Gen Z Pivot: 28%</h3><p className="text-xs text-slate-700">Securing future-ready pipeline.</p></Card>
-          <Card className="border-t-4 border-emerald-600"><Award size={36} className="text-emerald-600 mb-6"/><h3 className="text-lg font-bold">Elite Entry: 54%</h3><p className="text-xs text-slate-700">Top-Tier intake maintained.</p></Card>
-          <Card className="border-t-4 border-purple-500"><GraduationCap size={36} className="text-purple-500 mb-6"/><h3 className="text-lg font-bold">Adv. Degrees: 25%</h3><p className="text-xs text-slate-700">Competitive IP advantage.</p></Card>
+          <Card className="border-t-4 border-blue-900 bg-slate-50/50">
+            <Magnet size={36} className="text-blue-900 mb-6"/><h3 className="text-lg font-bold">Brand Pull: 55%</h3>
+            <p className="text-xs text-slate-700">Direct applications reached 55%. Reflects a matured brand presence.</p>
+          </Card>
+          <Card className="border-t-4 border-orange-500 bg-slate-50/50">
+            <Zap size={36} className="text-orange-500 mb-6"/><h3 className="text-lg font-bold">Gen Z Pivot: 28%</h3>
+            <p className="text-xs text-slate-700">Securing a future-ready engineering pipeline for the coming decade.</p>
+          </Card>
+          <Card className="border-t-4 border-emerald-600 bg-slate-50/50">
+            <Award size={36} className="text-emerald-600 mb-6"/><h3 className="text-lg font-bold">Elite Entry: 54%</h3>
+            <p className="text-xs text-slate-700">Intake from Top-Tier universities reached 54% selection.</p>
+          </Card>
+          <Card className="border-t-4 border-purple-500 bg-slate-50/50">
+            <GraduationCap size={36} className="text-purple-500 mb-6"/><h3 className="text-lg font-bold">Adv. Degrees: 25%</h3>
+            <p className="text-xs text-slate-700">1 in every 4 hires holds an MSc/PhD for IP advantage.</p>
+          </Card>
         </div>
 
-        {/* SECTION 01: RECRUITMENT OVERVIEW */}
+        {/* SECTION 01 */}
         <section className="mb-32">
           <SectionHeader num="01" title="Recruitment Overview" icon={LayoutDashboard} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
             <Card className="flex items-center gap-5 py-6">
               <div className="bg-blue-900 p-3 rounded-xl text-white"><Users size={24} /></div>
-              <div><span className="text-xs font-bold text-slate-400 uppercase">Total Hires 2025</span><br/><span className="text-4xl font-black text-blue-900">80</span></div>
+              <div><span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Hires 2025</span><br/><span className="text-4xl font-black text-blue-900">80</span></div>
             </Card>
-            <Card className="flex items-center gap-5 py-6 opacity-60">
+            <Card className="flex items-center gap-5 py-6 opacity-60 grayscale border-dashed">
               <div className="bg-slate-200 p-3 rounded-xl text-slate-400"><Users size={24} /></div>
-              <div><span className="text-xs font-bold text-slate-400 uppercase">Total Hires 2024</span><br/><span className="text-4xl font-black text-slate-500">75</span></div>
+              <div><span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Hires 2024</span><br/><span className="text-4xl font-black text-slate-500">75</span></div>
             </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <Card>
-              <h3 className="text-lg font-bold mb-8 flex items-center gap-2 uppercase text-slate-800"><Magnet size={20} className="text-blue-600"/> Sourcing</h3>
+              <h3 className="text-lg font-bold mb-8 flex items-center gap-2 uppercase"><Magnet size={20} className="text-blue-600"/> Recruitment Sourcing</h3>
               <div style={{ height: 400, width: '100%' }}>
-                <ResponsiveContainer><BarChart data={sourcingData} margin={{ top: 80 }} barGap={25}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" axisLine={false} tickLine={false} /><YAxis hide domain={[0, 100]} /><Legend verticalAlign="top" align="right" /><Bar name="2025" dataKey="2025" fill={COLORS.navy} radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<SafeLabel />} /></Bar><Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<SafeLabel />} /></Bar></BarChart></ResponsiveContainer>
+                <ResponsiveContainer><BarChart data={sourcingData} margin={{ top: 80 }} barGap={25}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" axisLine={false} tickLine={false} /><YAxis hide domain={[0, 100]} /><Legend verticalAlign="top" align="right" /><Bar name="2025" dataKey="2025" fill={COLORS.navy} radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<CustomLabel />} /></Bar><Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<CustomLabel />} /></Bar></BarChart></ResponsiveContainer>
               </div>
             </Card>
 
             <Card>
-              <h3 className="text-lg font-bold mb-8 flex items-center gap-2 uppercase text-slate-800"><Building2 size={20} className="text-emerald-600"/> Talent Allocation</h3>
+              <h3 className="text-lg font-bold mb-8 flex items-center gap-2 uppercase"><Building2 size={20} className="text-emerald-600"/> Talent Allocation</h3>
               <div style={{ height: 400, width: '100%' }}>
-                <ResponsiveContainer><BarChart data={destinationData} margin={{ top: 80 }} barGap={25}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" axisLine={false} tickLine={false} /><YAxis hide domain={[0, 100]} /><Legend verticalAlign="top" align="right" /><Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<SafeLabel />} /></Bar><Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<SafeLabel />} /></Bar></BarChart></ResponsiveContainer>
+                <ResponsiveContainer><BarChart data={destinationData} margin={{ top: 80 }} barGap={25}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" axisLine={false} tickLine={false} /><YAxis hide domain={[0, 100]} /><Legend verticalAlign="top" align="right" /><Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<CustomLabel />} /></Bar><Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<CustomLabel />} /></Bar></BarChart></ResponsiveContainer>
               </div>
               <div className="border-t pt-6 mt-4">
                 <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">R&D Unit Breakdown (2025 Detailed)</h4>
                 <div className="grid grid-cols-1 gap-3">
                   {rdUnitData.map(unit => (
                     <div key={unit.name} className="bg-slate-50 p-3 rounded-xl flex items-center justify-between border border-slate-100">
-                      <div className="flex items-center gap-3"><div className="w-2 h-8 rounded-full" style={{backgroundColor: unit.color}}></div><p className="text-xs font-bold text-slate-800">{unit.name}</p></div>
-                      <div className="text-right flex flex-col"><span className="text-xs font-black text-slate-800">{unit.ofRD.toFixed(1)}% OF R&D</span><span className="text-[10px] font-bold text-slate-500">{unit.ofTotal.toFixed(1)}% OF TOTAL</span></div>
+                      <div className="flex items-center gap-3"><div className="w-2 h-8 rounded-full" style={{backgroundColor: unit.color}}></div><p className="text-xs font-bold text-slate-800 uppercase">{unit.name}</p></div>
+                      <div className="text-right flex flex-col"><span className="text-xs font-black text-slate-800 uppercase">{unit.ofRD.toFixed(1)}% OF R&D HIRES</span><span className="text-[10px] font-bold text-slate-500 uppercase">{unit.ofTotal.toFixed(1)}% OF TOTAL HIRES</span></div>
                     </div>
                   ))}
                 </div>
@@ -168,19 +174,19 @@ const App = () => {
           </div>
         </section>
 
-        {/* SECTION 02: THE RECRUIT DNA */}
+        {/* SECTION 02 */}
         <section className="mb-32">
           <SectionHeader num="02" title="The Recruit DNA" icon={GraduationCap} />
           <Card className="mb-16">
             <div className="flex flex-col md:flex-row justify-between items-start gap-8">
               <div className="flex-1 w-full">
-                <h3 className="text-lg font-bold mb-8 flex items-center gap-2 uppercase text-slate-800"><GraduationCap size={20} className="text-emerald-700"/> Academic Origin</h3>
+                <h3 className="text-lg font-bold mb-8 flex items-center gap-2 uppercase"><GraduationCap size={20} className="text-emerald-700"/> Academic Origin</h3>
                 <div style={{ height: 350, width: '100%' }}>
-                  <ResponsiveContainer><BarChart data={eduData} margin={{ top: 80 }} barGap={25}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" axisLine={false} tickLine={false} /><YAxis hide domain={[0, 100]} /><Legend verticalAlign="top" align="right" /><Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<SafeLabel />} /></Bar><Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<SafeLabel />} /></Bar></BarChart></ResponsiveContainer>
+                  <ResponsiveContainer><BarChart data={eduData} margin={{ top: 80 }} barGap={25}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" axisLine={false} tickLine={false} /><YAxis hide domain={[0, 100]} /><Legend verticalAlign="top" align="right" /><Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<CustomLabel />} /></Bar><Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={28}><LabelList content={<CustomLabel />} /></Bar></BarChart></ResponsiveContainer>
                 </div>
                 <div className="mt-8 p-5 bg-slate-50 rounded-2xl border border-slate-200 flex gap-4 items-start">
                   <HelpCircle size={20} className="text-navy-600 mt-1 shrink-0" />
-                  <div><h4 className="text-xs font-black text-slate-800 uppercase mb-2">Note: Non-Degree Recruitment</h4><p className="text-[11px] text-slate-600 leading-relaxed">Refers to exceptional technical capabilities from Elite Military units (e.g., 8200) or extensive experience.</p></div>
+                  <div><h4 className="text-xs font-black text-slate-800 uppercase mb-2">Note: Non-Degree Recruitment</h4><p className="text-[11px] text-slate-600 font-medium leading-relaxed">The category <strong>"Non-Degree / Experience"</strong> refers to hires with exceptional technical capabilities based on significant <strong>Elite Military Technology units (e.g., 8200)</strong>.</p></div>
                 </div>
               </div>
               <div className="w-full md:w-96 flex flex-col gap-6">
@@ -198,29 +204,29 @@ const App = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-black">
             <Card>
-              <h3 className="text-lg font-bold mb-6 uppercase text-slate-800"><Users size={20} className="text-blue-600 inline mr-2"/> Gender</h3>
+              <h3 className="text-lg font-bold mb-6 uppercase"><Users size={20} className="text-blue-600 inline mr-2"/> Gender</h3>
               <div style={{ height: 200, width: '100%' }}>
                 <ResponsiveContainer><PieChart><Pie data={genderData} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value" stroke="none">{genderData.map((entry, index) => <Cell key={index} fill={entry.color} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer>
               </div>
             </Card>
             <Card>
-              <h3 className="text-lg font-bold mb-6 uppercase text-slate-800"><Star size={20} className="text-orange-600 inline mr-2"/> Age Groups</h3>
-              <div style={{ height: 250, width: '100%' }}><ResponsiveContainer><BarChart data={ageData} margin={{ top: 35 }}><XAxis dataKey="name" axisLine={false} tickLine={false} /><Bar dataKey="value" fill={COLORS.orange} radius={[4, 4, 0, 0]} barSize={25}><LabelList content={<SafeLabel />} position="top" /></Bar></BarChart></ResponsiveContainer></div>
+              <h3 className="text-lg font-bold mb-6 uppercase"><Star size={20} className="text-orange-600 inline mr-2"/> Age Groups</h3>
+              <div style={{ height: 250, width: '100%' }}><ResponsiveContainer><BarChart data={ageData} margin={{ top: 35 }}><XAxis dataKey="name" axisLine={false} tickLine={false} /><Bar dataKey="value" fill={COLORS.orange} radius={[4, 4, 0, 0]} barSize={25}><LabelList content={<CustomLabel />} position="top" /></Bar></BarChart></ResponsiveContainer></div>
             </Card>
             <Card>
-              <h3 className="text-lg font-bold mb-6 uppercase text-slate-800"><Clock size={20} className="text-emerald-600 inline mr-2"/> Seniority</h3>
-              <div style={{ height: 250, width: '100%' }}><ResponsiveContainer><BarChart data={seniorityData} margin={{ top: 35 }}><XAxis dataKey="name" axisLine={false} tickLine={false} /><Bar dataKey="value" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={25}><LabelList content={<SafeLabel />} position="top" /></Bar></BarChart></ResponsiveContainer></div>
+              <h3 className="text-lg font-bold mb-6 uppercase"><Clock size={20} className="text-emerald-600 inline mr-2"/> Seniority</h3>
+              <div style={{ height: 250, width: '100%' }}><ResponsiveContainer><BarChart data={seniorityData} margin={{ top: 35 }}><XAxis dataKey="name" axisLine={false} tickLine={false} /><Bar dataKey="value" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={25}><LabelList content={<CustomLabel />} position="top" /></Bar></BarChart></ResponsiveContainer></div>
             </Card>
           </div>
         </section>
 
-        {/* SECTION 03: SITE DNA COMPARISON */}
+        {/* SECTION 03 */}
         <section className="mb-32">
           <SectionHeader num="03" title="Site DNA Comparison" icon={MapPin} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-black">
             <Card className="border-t-4 border-blue-900">
               <h4 className="text-2xl font-black mb-1 text-blue-900 uppercase">Kfar Saba</h4>
-              <p className="text-slate-400 text-xs font-bold uppercase mb-6 tracking-widest">Operational Focus</p>
+              <p className="text-slate-400 text-xs font-bold uppercase mb-6 tracking-widest">Operational & Management Focus</p>
               <div className="space-y-4 font-medium text-sm">
                 <div className="flex justify-between border-b pb-2 uppercase"><span>Hires (Allocation)</span><span>66.2%</span></div>
                 <div className="flex justify-between border-b pb-2 uppercase"><span>Average Age</span><span>36.7</span></div>
@@ -230,7 +236,7 @@ const App = () => {
             </Card>
             <Card className="border-t-4 border-emerald-600">
               <h4 className="text-2xl font-black mb-1 text-emerald-700 uppercase">North Hub</h4>
-              <p className="text-slate-400 text-xs font-bold uppercase mb-6 tracking-widest">Engineering Hub</p>
+              <p className="text-slate-400 text-xs font-bold uppercase mb-6 tracking-widest">Academic & Engineering Hub</p>
               <div className="space-y-4 font-medium text-sm">
                 <div className="flex justify-between border-b pb-2 uppercase"><span>Hires (Allocation)</span><span>33.8%</span></div>
                 <div className="flex justify-between border-b pb-2 uppercase"><span>Average Age</span><span>35.9</span></div>
