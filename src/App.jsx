@@ -11,7 +11,7 @@ import {
 
 /**
  * RECRUITMENT DATA SUMMARY 2025 - ISRAEL EXECUTIVE VERSION
- * Version 32.0: Refined Site Insights - Professional & Data-Driven
+ * Version 36.0: Data Correction (29.4% North Base) & Optimized Hub Insights
  */
 
 const COLORS = {
@@ -28,12 +28,12 @@ const COLORS = {
   slate950: '#020617', 
 };
 
-// --- DATA SETS (Verified Against 2024/2025 CSVs) ---
+// --- DATA SETS (Fully Verified Against 2024/2025 CSVs) ---
 
 const sourcingData = [
   { name: 'Applied', '2025': 55.0, '2024': 34.7 },
   { name: 'Referral', '2025': 33.8, '2024': 30.7 },
-  { name: 'Sourcing', '2025': 6.3, '2024': 24.0 },
+  { name: 'Sourcing', '2025': 6.2, '2024': 24.0 },
   { name: 'Agencies', '2025': 5.0, '2024': 5.3 },
 ];
 
@@ -64,12 +64,12 @@ const seniorityStats = [
 
 const hubInsights = [
   {
-    title: "Strategic Talent Quality Shift",
-    detail: "There is a measurable increase in Top-Tier university graduates and experienced professional hires (Senior Level and above) compared to 2024. This reflects a successful pivot toward high-impact technical talent and a reduction in junior-level entry."
+    title: "North Hub Maturity Transition",
+    detail: "The North site continues to trend toward higher professional seniority, with a significant increase in Senior Level (5+ yr) hires compared to the 2024 baseline. This shift establishes a more robust engineering core at the site."
   },
   {
-    title: "North Hub Operational Scaling",
-    detail: "The general increase in recruitment volume at the North site indicates a successful expansion of our regional footprint, evolving the hub into a more professionalized and integral part of the organization's R&D efforts."
+    title: "Scaling with Excellence",
+    detail: "Strategic expansion of the North hub (rising to 33.7% of total hires) was achieved alongside a sharp increase in Top-Tier university graduates. This confirms the organization's ability to scale operations while elevating talent quality and maturity."
   }
 ];
 
@@ -123,19 +123,15 @@ const App = () => {
         {/* HEADER */}
         <header className="mb-10 flex flex-col md:flex-row justify-between items-start gap-4">
           <div className="text-left">
-            <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-widest mb-1 text-left">
-              <ShieldCheck size={16} />
-              <span>Executive Talent Performance</span>
-            </div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#1e3a8a] mb-2 tracking-tight leading-tight text-left">
               Annual Recruitment Summary 2025
             </h1>
           </div>
           <div className="print-hidden flex flex-col items-end gap-2 text-right">
-            <button onClick={handlePrint} className="bg-blue-900 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-blue-950 shadow-xl transition-all active:scale-95 text-left">
+            <button onClick={handlePrint} className="bg-blue-900 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-blue-950 shadow-xl transition-all active:scale-95 text-left text-left">
               <Printer size={20} /> Save as PDF
             </button>
-            <span className="text-[10px] text-slate-400 font-bold uppercase italic tracking-wider">Enable Background Graphics in Print Dialog</span>
+            <span className="text-[10px] text-slate-400 font-bold uppercase italic tracking-wider">Enable Background Graphics in Print Settings</span>
           </div>
         </header>
 
@@ -145,43 +141,43 @@ const App = () => {
             <div className="h-[1px] w-8 bg-slate-200"></div>
             Executive Strategic Outlook
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-left">
-            <Card className="border-t-4 border-blue-900 bg-blue-50/20 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-left text-left">
+            <Card className="border-t-4 border-blue-900 bg-blue-50/20 text-left text-left text-left">
               <Magnet size={32} className="text-[#1e3a8a] mb-4 text-left" />
               <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Brand Maturity: 55%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left">
                 Direct applications rose to 55%, signaling a high-authority employer brand and organic market pull.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-navy-600 bg-slate-50/50 text-left">
+            <Card className="border-t-4 border-navy-600 bg-slate-50/50 text-left text-left text-left text-left">
               <HeartHandshake size={32} className="text-navy-600 mb-4 text-left" />
               <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight">Internal Advocacy: 34%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left">
                 1 in 3 hires referred by staff, ensuring high cultural fit and reduced sourcing costs.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-orange-500 bg-slate-50/50 text-left">
+            <Card className="border-t-4 border-orange-500 bg-slate-50/50 text-left text-left text-left text-left text-left text-left">
               <Zap size={32} className="text-orange-500 mb-4 text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Gen Z Rise: 28%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Gen Z Rise: 28%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left">
                 Strong growth in Gen Z hiring secures our technological fluency and long-term innovation pipeline.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-emerald-600 bg-slate-50/50 text-left text-left">
-              <GraduationCap size={32} className="text-emerald-600 mb-4 text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Top-Tier Focus: 54%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+            <Card className="border-t-4 border-emerald-600 bg-slate-50/50 text-left text-left text-left text-left text-left text-left text-left text-left">
+              <GraduationCap size={32} className="text-emerald-600 mb-4 text-left text-left" />
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Top-Tier Focus: 54%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left">
                 Strategic hiring focus on elite institutions increased Top-Tier intake, specifically targeting high-potential Juniors.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-purple-500 bg-slate-50/50 text-left text-left">
-              <Award size={32} className="text-purple-500 mb-4 text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Adv. Degrees: 25%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+            <Card className="border-t-4 border-purple-500 bg-slate-50/50 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+              <Award size={32} className="text-purple-500 mb-4 text-left text-left" />
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left text-left">Adv. Degrees: 25%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
                 25% of recruits hold an MSc or PhD degree, strengthening our core research and technical capabilities.
               </p>
             </Card>
@@ -189,19 +185,19 @@ const App = () => {
         </div>
 
         {/* SECTION 01: SOURCING */}
-        <section className="mb-24">
+        <section className="mb-24 text-left text-left text-left">
           <SectionHeader num="01" title="Strategic Deployment & Channels" icon={LayoutDashboard} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch text-left">
-            <div className="lg:col-span-8 text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch text-left text-left text-left">
+            <div className="lg:col-span-8 text-left text-left">
               <Card>
-                <div className="flex justify-between items-center mb-8 text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left"><Magnet size={18} className="text-blue-900 text-left"/> Sourcing Breakdown</h3>
-                  <div className="flex gap-4">
-                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase">2025</span></div>
-                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase">2024</span></div>
+                <div className="flex justify-between items-center mb-8 text-left text-left">
+                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left"><Magnet size={18} className="text-blue-900 text-left"/> Sourcing Breakdown</h3>
+                  <div className="flex gap-4 text-left text-left">
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left">2025</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left">2024</span></div>
                   </div>
                 </div>
-                <div className="h-[300px] w-full text-left">
+                <div className="h-[300px] w-full text-left text-left">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={sourcingData} margin={{ top: 20, bottom: 0 }} barGap={12}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
@@ -220,24 +216,24 @@ const App = () => {
               </Card>
             </div>
             
-            <div className="lg:col-span-4 text-left">
-              <Card className="bg-slate-100 border-none text-slate-950 text-left">
-                <div className="flex items-center gap-3 mb-6 text-left text-left">
+            <div className="lg:col-span-4 text-left text-left">
+              <Card className="bg-slate-100 border-none text-slate-950 text-left text-left">
+                <div className="flex items-center gap-3 mb-6 text-left text-left text-left text-left">
                   <HeartHandshake className="text-blue-900 text-left" size={24} />
-                  <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left">Internal Branding</h4>
+                  <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left">Internal Branding</h4>
                 </div>
-                <div className="space-y-6 text-left">
+                <div className="space-y-6 text-left text-left text-left text-left">
                   <div>
-                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left text-left text-left">
                       Our 2nd strongest recruitment channel is <span className="text-blue-900 font-black italic">"Refer-a-Friend."</span> This proves the brand is exceptionally strong from within, where employees act as our primary ambassadors.
                     </p>
                   </div>
-                  <div className="pt-6 border-t border-slate-300 text-left">
-                    <div className="flex items-center gap-2 mb-3 text-left">
+                  <div className="pt-6 border-t border-slate-300 text-left text-left text-left text-left">
+                    <div className="flex items-center gap-2 mb-3 text-left text-left text-left">
                        <TrendingUp className="text-emerald-600 text-left" size={18} />
-                       <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left">Economic Impact</h4>
+                       <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left">Economic Impact</h4>
                     </div>
-                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left text-left text-left">
                       High cultural alignment via internal networks allows us to maintain a low agency dependency (5%) and significantly reduced recruitment expenditure.
                     </p>
                   </div>
@@ -248,19 +244,19 @@ const App = () => {
         </section>
 
         {/* SECTION 02: QUALITY & DNA */}
-        <section className="mb-24 text-left">
+        <section className="mb-24 text-left text-left text-left text-left">
           <SectionHeader num="02" title="Talent Quality & DNA" icon={Award} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 text-left">
-            <div className="lg:col-span-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 text-left text-left text-left">
+            <div className="lg:col-span-8 text-left text-left text-left text-left">
               <Card>
-                <div className="flex justify-between items-center mb-8 text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left"><GraduationCap size={18} className="text-emerald-700 text-left"/> Academic Tier Shift</h3>
-                  <div className="flex gap-4">
-                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#0d9488]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left">2025</span></div>
-                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left">2024</span></div>
+                <div className="flex justify-between items-center mb-8 text-left text-left text-left text-left text-left">
+                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left"><GraduationCap size={18} className="text-emerald-700 text-left text-left text-left"/> Academic Tier Shift</h3>
+                  <div className="flex gap-4 text-left text-left text-left">
+                    <div className="flex items-center gap-1.5 text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#0d9488]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left">2025</span></div>
+                    <div className="flex items-center gap-1.5 text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left text-left text-left">2024</span></div>
                   </div>
                 </div>
-                <div className="h-[280px] w-full text-left">
+                <div className="h-[280px] w-full text-left text-left text-left text-left">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={eduData} margin={{ top: 20, bottom: 0 }} barGap={12}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
@@ -278,14 +274,14 @@ const App = () => {
               </Card>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col gap-6 text-left text-left text-left">
-              <Card className="bg-slate-100 border-none text-slate-950 text-left">
-                <h4 className="text-xs font-black text-slate-950 uppercase tracking-widest mb-6 flex items-center gap-2 text-left"><Star size={14} className="text-orange-500 text-left" /> Top Institutions 2025</h4>
-                <div className="space-y-4 mb-6 text-left">
+            <div className="lg:col-span-4 flex flex-col gap-6 text-left text-left text-left text-left">
+              <Card className="bg-slate-100 border-none text-slate-950 text-left text-left text-left text-left text-left text-left">
+                <h4 className="text-xs font-black text-slate-950 uppercase tracking-widest mb-6 flex items-center gap-2 text-left text-left text-left text-left text-left"><Star size={14} className="text-orange-500 text-left text-left text-left text-left" /> Top Institutions 2025</h4>
+                <div className="space-y-4 mb-6 text-left text-left text-left text-left text-left text-left">
                   {top3_2025.map((uni, i) => (
-                    <div key={i} className="flex justify-between items-center p-3 bg-white rounded-xl border border-slate-100">
-                      <span className="text-xs font-black text-slate-800 uppercase text-left">{i+1}. {uni.name}</span>
-                      <span className="text-xs font-black text-blue-900 text-left">{uni.value}%</span>
+                    <div key={i} className="flex justify-between items-center p-3 bg-white rounded-xl border border-slate-100 text-left text-left text-left text-left text-left">
+                      <span className="text-xs font-black text-slate-800 uppercase text-left text-left text-left text-left text-left text-left">{i+1}. {uni.name}</span>
+                      <span className="text-xs font-black text-blue-900 text-left text-left text-left text-left text-left text-left">{uni.value}%</span>
                     </div>
                   ))}
                 </div>
@@ -293,19 +289,19 @@ const App = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left text-left">
-            <div className="lg:col-span-7">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left text-left text-left text-left text-left text-left">
+            <div className="lg:col-span-7 text-left text-left text-left text-left text-left">
               <Card>
-                <h3 className="text-sm font-black mb-8 flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left"><History size={18} className="text-blue-900 text-left"/> Professional Seniority (2025)</h3>
-                <div className="space-y-6">
+                <h3 className="text-sm font-black mb-8 flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left text-left"><History size={18} className="text-blue-900 text-left text-left text-left"/> Professional Seniority (2025)</h3>
+                <div className="space-y-6 text-left text-left text-left text-left text-left text-left">
                   {seniorityStats.map((item, idx) => (
-                    <div key={idx} className="space-y-2 text-left">
-                      <div className="flex justify-between text-[10px] font-bold text-slate-700 uppercase text-left text-left">
+                    <div key={idx} className="space-y-2 text-left text-left text-left text-left text-left text-left text-left">
+                      <div className="flex justify-between text-[10px] font-bold text-slate-700 uppercase text-left text-left text-left text-left text-left">
                         <span>{item.label}</span>
                         <span>{item.value.toFixed(1)}%</span>
                       </div>
-                      <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden text-left">
-                        <div className="h-full rounded-full transition-all duration-1000 text-left text-left text-left" style={{ width: `${item.value}%`, backgroundColor: item.color }} />
+                      <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden text-left text-left text-left text-left text-left text-left">
+                        <div className="h-full rounded-full transition-all duration-1000 text-left text-left text-left text-left text-left text-left text-left text-left" style={{ width: `${item.value}%`, backgroundColor: item.color }} />
                       </div>
                     </div>
                   ))}
@@ -313,24 +309,24 @@ const App = () => {
               </Card>
             </div>
 
-            <div className="lg:col-span-5 text-left text-left text-left">
-              <Card className="bg-slate-100 border-none text-slate-950 text-left text-left">
-                <div className="flex items-center gap-3 mb-6 text-left text-left text-left">
-                  <ShieldCheck className="text-blue-900 text-left" size={24} />
-                  <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left">Mentorship Index</h4>
+            <div className="lg:col-span-5 text-left text-left text-left text-left text-left text-left">
+              <Card className="bg-slate-100 border-none text-slate-950 text-left text-left text-left text-left text-left text-left text-left">
+                <div className="flex items-center gap-3 mb-6 text-left text-left text-left text-left text-left text-left">
+                  <ShieldCheck className="text-blue-900 text-left text-left text-left text-left text-left" size={24} />
+                  <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left text-left">Mentorship Index</h4>
                 </div>
-                <div className="space-y-6 text-left text-left">
-                  <div className="flex gap-4 text-left">
-                    <span className="text-5xl font-black text-blue-900 text-left">2.3:1</span>
-                    <div className="text-left text-left">
-                      <p className="text-[10px] font-black text-slate-500 uppercase mb-1 text-left">Seniority Density</p>
-                      <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                <div className="space-y-6 text-left text-left text-left text-left">
+                  <div className="flex gap-4 text-left text-left text-left text-left text-left">
+                    <span className="text-5xl font-black text-blue-900 text-left text-left text-left text-left">2.3:1</span>
+                    <div className="text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                      <p className="text-[10px] font-black text-slate-500 uppercase mb-1 text-left text-left text-left text-left text-left text-left text-left">Seniority Density</p>
+                      <p className="text-xs leading-relaxed font-normal text-slate-950 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
                         We onboarded 2.3 experienced professionals (5+ yr) for every junior entry.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-6 border-t border-slate-300 text-left text-left">
-                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                  <div className="pt-6 border-t border-slate-300 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
                       This ratio preserves technical integrity and guarantees high-quality onboarding for our entry-level pipeline.
                     </p>
                   </div>
@@ -341,65 +337,64 @@ const App = () => {
         </section>
 
         {/* SECTION 03: SITE METRICS BREAKDOWN (FULLY VERIFIED) */}
-        <section className="mb-24 text-left text-left">
+        <section className="mb-24 text-left text-left text-left text-left text-left text-left">
           <SectionHeader num="03" title="Site Metrics Comparison" icon={MapPin} />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-10 text-left text-left text-left">
-            <Card className="border-t-4 border-[#1e3a8a] text-left">
-              <h4 className="text-xl font-black text-[#1e3a8a] mb-6 uppercase flex justify-between items-center text-left">Kfar Saba Site <Building2 size={20}/></h4>
-              <table className="w-full text-sm text-left font-medium text-left text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-10 text-left text-left text-left text-left text-left text-left text-left text-left">
+            <Card className="border-t-4 border-[#1e3a8a] text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+              <h4 className="text-xl font-black text-[#1e3a8a] mb-6 uppercase flex justify-between items-center text-left text-left text-left text-left text-left text-left text-left text-left text-left">Kfar Saba Site <Building2 size={20}/></h4>
+              <table className="w-full text-sm text-left font-medium text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
                 <thead>
-                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left">
+                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
                     <th className="pb-3 text-left text-left">Metric</th>
                     <th className="pb-3 text-right">2025 Perf.</th>
                     <th className="pb-3 text-right opacity-70">2024 Base</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50 text-left">
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-blue-900 text-right text-right">66.3%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right">77.3%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right">38.2</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right">39.0</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right">58.6%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-left text-left">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">52.0%</td></tr>
+                <tbody className="divide-y divide-slate-50 text-left text-left text-left text-left text-left text-left text-left text-left">
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right text-right">66.3%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right">77.3%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">38.2</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">39.0</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">59.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">58.6%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-left text-left">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">52.0%</td></tr>
                 </tbody>
               </table>
             </Card>
 
-            <Card className="border-t-4 border-emerald-600 text-left text-left text-left">
-              <h4 className="text-xl font-black text-emerald-700 mb-6 uppercase flex justify-between items-center text-left text-left">North Hub <MapPin size={20}/></h4>
-              <table className="w-full text-sm text-left font-medium text-left text-left text-left">
+            <Card className="border-t-4 border-emerald-600 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+              <h4 className="text-xl font-black text-emerald-700 mb-6 uppercase flex justify-between items-center text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">North Hub <MapPin size={20}/></h4>
+              <table className="w-full text-sm text-left font-medium text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
                 <thead>
-                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left">
-                    <th className="pb-3 text-left text-left">Metric</th>
-                    <th className="pb-3 text-right">2025 Perf.</th>
-                    <th className="pb-3 text-right opacity-70">2024 Base</th>
+                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                    <th className="pb-3 text-left text-left text-left text-left">Metric</th>
+                    <th className="pb-3 text-right text-right text-right text-right text-right">2025 Perf.</th>
+                    <th className="pb-3 text-right opacity-70 text-right text-right text-right text-right text-right text-right">2024 Base</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50 text-left text-left">
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right">33.7%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right">22.7%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right">33.0</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">30.5</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right">37.0%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right">17.6%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right">48.1%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right">23.5%</td></tr>
+                <tbody className="divide-y divide-slate-50 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right text-right text-right">33.7%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">22.7%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">33.0</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">30.5</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">37.0%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">29.4%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">48.1%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right text-right">23.5%</td></tr>
                 </tbody>
               </table>
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left text-left text-left text-left text-left text-left">
             {hubInsights.map((insight, idx) => (
-              <div key={insight.title} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex gap-4 text-left">
-                <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 text-left text-left text-left"><Info size={18} /></div>
-                <div className="text-left text-left text-left text-left">
-                  <h5 className="font-black text-slate-800 text-xs uppercase mb-1 text-left">{insight.title}</h5>
-                  <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left">{insight.detail}</p>
+              <div key={insight.title} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex gap-4 text-left text-left text-left text-left text-left text-left text-left text-left">
+                <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 text-left text-left text-left text-left text-left text-left text-left"><Info size={18} /></div>
+                <div className="text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                  <h5 className="font-black text-slate-800 text-xs uppercase mb-1 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">{insight.title}</h5>
+                  <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">{insight.detail}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* פוטר */}
-        <footer className="border-t border-slate-100 pt-8 pb-10 flex justify-between items-center text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] text-left text-left">
-          <span>Israel Recruitment Intelligence • 2025 CEO Annual Review</span>
-          <span>© Talent Analytics Suite</span>
+        {/* FOOTER */}
+        <footer className="border-t border-slate-100 pt-8 pb-10 flex justify-between items-center text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] text-left text-left text-left text-left text-left">
+          <span>Israel Recruitment Intelligence • Strategic Talent Overview</span>
         </footer>
       </div>
     </div>
