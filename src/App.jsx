@@ -159,7 +159,8 @@ const App = () => {
               <Magnet size={32} className="text-[#1e3a8a] mb-4 text-left text-left" />
               <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Brand Maturity: 55%</h3>
               <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
-                Direct applications rose to 55%, signaling a high-authority employer brand and organic market pull.
+                Direct applications surged from 35% to 55% year-over-year, demonstrating 
+                accelerated employer brand recognition and strengthened market positioning
               </p>
             </Card>
 
