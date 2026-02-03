@@ -160,7 +160,7 @@ const App = () => {
               <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Brand Maturity: 55%</h3>
               <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
                 Direct applications surged from 35% to 55% year-over-year, demonstrating 
-                accelerated employer brand recognition and strengthened market positioning
+                accelerated employer brand recognition and strengthened market positioning.
               </p>
             </Card>
 
@@ -168,7 +168,8 @@ const App = () => {
               <HeartHandshake size={32} className="text-navy-600 mb-4 text-left text-left" />
               <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight">Internal Advocacy: 34%</h3>
               <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
-                1 in 3 hires referred by staff, ensuring high cultural fit and reduced sourcing costs.
+               1 in 3 hires referred by staff, reflecting strong internal 
+              satisfaction and reduced acquisition costs vs. external channels.
               </p>
             </Card>
 
@@ -176,7 +177,8 @@ const App = () => {
               <Zap size={32} className="text-orange-500 mb-4 text-left text-left text-left" />
               <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Gen Z Rise: 28%</h3>
               <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
-                Strong growth in Gen Z hiring secures our technological fluency and long-term innovation pipeline.
+                Gen Z hiring grew to 28%, bringing technological adaptability and 
+                innovation mindset essential for maintaining competitive technical edge.
               </p>
             </Card>
 
@@ -184,7 +186,8 @@ const App = () => {
               <GraduationCap size={32} className="text-emerald-600 mb-4 text-left text-left text-left" />
               <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Top-Tier Focus: 54%</h3>
               <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
-                Strategic hiring focus on elite institutions increased Top-Tier intake, specifically targeting high-potential Juniors.
+                Elite university graduates rose to 54%, up from 45%, reflecting 
+                deliberate focus on top-tier academic background.
               </p>
             </Card>
 
