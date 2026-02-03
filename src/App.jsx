@@ -6,12 +6,12 @@ import {
 import {
   Users, Award, Zap, GraduationCap, LayoutDashboard,
   MapPin, ShieldCheck, Magnet, Building2, Star, Printer, 
-  User, UserCheck, TrendingUp, History, CheckCircle, HeartHandshake, Lightbulb
+  History, CheckCircle, HeartHandshake, Lightbulb, Info, Target, TrendingUp
 } from 'lucide-react';
 
 /**
  * RECRUITMENT DATA SUMMARY 2025 - ISRAEL EXECUTIVE VERSION
- * Final Verified & Robust Print Implementation
+ * Version 32.0: Refined Site Insights - Professional & Data-Driven
  */
 
 const COLORS = {
@@ -23,12 +23,12 @@ const COLORS = {
   slate50: '#f8fafc',
   slate100: '#f1f5f9',
   slate200: '#e2e8f0',
+  slate300: '#cbd5e1',
   slate400: '#94a3b8',
-  slate500: '#64748b',
-  slate700: '#334155'
+  slate950: '#020617', 
 };
 
-// --- DATA SETS ---
+// --- DATA SETS (Verified Against 2024/2025 CSVs) ---
 
 const sourcingData = [
   { name: 'Applied', '2025': 55.0, '2024': 34.7 },
@@ -38,21 +38,15 @@ const sourcingData = [
 ];
 
 const destinationData = [
-  { name: 'R&D', '2025': 88.8, '2024': 84.0 },
-  { name: 'Core Operations*', '2025': 11.2, '2024': 16.0 },
-];
-
-const rdUnitData = [
-  { name: 'RAT', ofRD: 47.9, ofTotal: 42.5, color: COLORS.navy },
-  { name: 'RANOps', ofRD: 29.6, ofTotal: 26.3, color: COLORS.emerald },
-  { name: 'Radio R&D', ofRD: 22.5, ofTotal: 20.0, color: COLORS.orange }
+  { name: 'R&D', '2025': 88.8, '2024': 84.0 }, 
+  { name: 'NON-R&D UNITS', '2025': 11.2, '2024': 16.0 }, 
 ];
 
 const eduData = [
   { name: 'TOP-TIER UNI', '2025': 53.8, '2024': 45.3 },
   { name: 'COLLEGES', '2025': 45.0, '2024': 34.7 },
   { name: 'GLOBAL UNI', '2025': 0.0, '2024': 6.7 },
-  { name: 'NON-DEGREE / EXP', '2025': 1.3, '2024': 13.3 }
+  { name: 'NON-DEGREE / EXP', '2025': 1.2, '2024': 13.3 }
 ];
 
 const top3_2025 = [
@@ -61,36 +55,31 @@ const top3_2025 = [
   { name: "Ben-Gurion Uni", value: 11.3 }
 ];
 
-const generationalComparison = [
-  { name: 'Gen Z', '2025': 28.0, '2024': 21.3 },
-  { name: 'Millennials', '2025': 48.8, '2024': 50.7 },
-  { name: 'Gen X', '2025': 23.7, '2024': 28.0 },
-];
-
-const ageStats = {
-  global2025: 36.4,
-  global2024: 37.1
-};
-
-const genderStats = {
-  male2025: 80,
-  female2025: 20
-};
-
 const seniorityStats = [
-  { label: 'Leadership & Strategic Experts (10-20 Years)', value: 20.0, color: COLORS.navy },
-  { label: 'Established Senior Professionals (5-10 Years)', value: 30.0, color: COLORS.emerald },
-  { label: 'Experienced Professionals (2-5 Years)', value: 28.7, color: COLORS.blue },
-  { label: 'Junior & Entry-Level (0-2 Years)', value: 21.3, color: COLORS.orange },
+  { label: 'Staff & Principal (10+ Years)', value: 20.0, color: COLORS.navy },
+  { label: 'Senior Level (5-10 Years)', value: 30.0, color: COLORS.emerald },
+  { label: 'Mid-Level (2-5 Years)', value: 28.7, color: COLORS.blue },
+  { label: 'Junior & Entry (0-2 Years)', value: 21.3, color: COLORS.orange },
 ];
 
-// --- UI SUB-COMPONENTS ---
+const hubInsights = [
+  {
+    title: "Strategic Talent Quality Shift",
+    detail: "There is a measurable increase in Top-Tier university graduates and experienced professional hires (Senior Level and above) compared to 2024. This reflects a successful pivot toward high-impact technical talent and a reduction in junior-level entry."
+  },
+  {
+    title: "North Hub Operational Scaling",
+    detail: "The general increase in recruitment volume at the North site indicates a successful expansion of our regional footprint, evolving the hub into a more professionalized and integral part of the organization's R&D efforts."
+  }
+];
+
+// --- UI COMPONENTS ---
 
 const CustomLabel = (props) => {
   const { x, y, width, value } = props;
   if (value === undefined) return null;
   return (
-    <text x={x + width / 2} y={y - 10} fill={COLORS.slate700} textAnchor="middle" fontSize={10} fontWeight="900">
+    <text x={x + width / 2} y={y - 10} fill={COLORS.slate950} textAnchor="middle" fontSize={10} fontWeight="900">
       {`${value.toFixed(1)}%`}
     </text>
   );
@@ -107,7 +96,7 @@ const SectionHeader = ({ num, title, icon: Icon }) => (
     <div className="bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0">
       {num}
     </div>
-    <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase flex items-center gap-2">
+    <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase flex items-center gap-2 text-left">
       {Icon && <Icon size={24} className="text-slate-600" />}
       {title}
     </h2>
@@ -115,491 +104,301 @@ const SectionHeader = ({ num, title, icon: Icon }) => (
 );
 
 const App = () => {
-  const handlePrint = () => {
-    window.print();
-  };
+  const handlePrint = () => window.print();
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-6 md:p-12 lg:p-16 relative text-left">
-      
       <style dangerouslySetInnerHTML={{ __html: `
         @media print {
-          /* הסתרת כפתורים */
           .print-hidden { display: none !important; }
-          
-          /* הגדרות דף */
-          @page { margin: 1.5cm; size: A4 portrait; }
           body { background: white !important; padding: 0 !important; }
-
-          /* הגדלת הפריסה - הפיכת הגרידים לעמודה אחת גדולה */
-          .grid { display: block !important; }
-          
-          /* הגדלת קוביות ומניעת חיתוך */
-          div[class*="bg-white"], section, header { 
-            break-inside: avoid !important; 
-            margin-bottom: 3rem !important;
-            width: 100% !important;
-          }
-
-          /* הגדלת כותרות ומספרים */
-          h1 { font-size: 40pt !important; }
-          h2 { font-size: 26pt !important; }
-          
-          /* הגדלת הנתונים הגדולים (ה-80, הגיל וכו') */
-          span[class*="text-4xl"], span[class*="text-6xl"] { 
-            font-size: 75pt !important; 
-            display: block !important; 
-            line-height: 1 !important;
-            margin: 20pt 0 !important;
-          }
-
-          /* הגדלת טקסט רגיל בקופסאות */
-          p { font-size: 15pt !important; line-height: 1.6 !important; }
-          span[class*="text-xs"], span[class*="text-sm"] { font-size: 13pt !important; }
-          
-          /* הגדלת תוויות בתוך הגרפים */
-          .recharts-text { font-size: 14pt !important; font-weight: bold !important; }
-
-          /* הגדלת טבלאות */
-          table td, table th { font-size: 15pt !important; padding: 12pt !important; }
-
-          /* וידוא שהצבעים יוצאים ב-PDF */
+          .bg-slate-50 { background: white !important; }
+          .shadow-sm, .border { box-shadow: none !important; border: 1px solid #eee !important; }
+          @page { margin: 1cm; size: auto; }
           * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
       `}} />
 
-      <div className="max-w-[1400px] mx-auto">
-        
+      <div className="max-w-[1400px] mx-auto text-left">
         {/* HEADER */}
         <header className="mb-10 flex flex-col md:flex-row justify-between items-start gap-4">
           <div className="text-left">
             <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-widest mb-1 text-left">
               <ShieldCheck size={16} />
-              <span>Executive Recruitment Summary</span>
+              <span>Executive Talent Performance</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#1e3a8a] mb-2 tracking-tight leading-tight text-left">
-              Annual Recruitment Analytics 2025
+              Annual Recruitment Summary 2025
             </h1>
           </div>
-          
           <div className="print-hidden flex flex-col items-end gap-2 text-right">
-            <button 
-              onClick={handlePrint}
-              className="bg-blue-900 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-blue-950 transition-all shadow-xl active:scale-95"
-            >
-              <Printer size={20} />
-              Save as PDF
+            <button onClick={handlePrint} className="bg-blue-900 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-blue-950 shadow-xl transition-all active:scale-95 text-left">
+              <Printer size={20} /> Save as PDF
             </button>
-            <span className="text-[10px] text-slate-400 font-bold uppercase italic">If button fails, use Ctrl + P</span>
+            <span className="text-[10px] text-slate-400 font-bold uppercase italic tracking-wider">Enable Background Graphics in Print Dialog</span>
           </div>
         </header>
 
-        {/* STRATEGIC INSIGHTS 2025 */}
-        <div className="mb-16">
+        {/* EXECUTIVE HIGHLIGHTS (BIG PICTURE) */}
+        <div className="mb-20">
           <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-3 text-left">
             <div className="h-[1px] w-8 bg-slate-200"></div>
-            Strategic Highlights
+            Executive Strategic Outlook
           </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 text-left">
-            <Card className="border-t-4 border-blue-900 bg-slate-50/50">
-              <Magnet size={36} className="text-[#1e3a8a] mb-6" />
-              <h3 className="text-lg font-bold text-slate-800 mb-2 uppercase leading-tight">Brand Maturity: 55%</h3>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed">
-                Elevated brand awareness now drives 55% direct hiring attraction. Maturity enables organic talent pull, decreasing dependency on external agency channels.
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-left">
+            <Card className="border-t-4 border-blue-900 bg-blue-50/20 text-left">
+              <Magnet size={32} className="text-[#1e3a8a] mb-4 text-left" />
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Brand Maturity: 55%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+                Direct applications rose to 55%, signaling a high-authority employer brand and organic market pull.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-navy-600 bg-slate-50/50">
-              <HeartHandshake size={36} className="text-navy-600 mb-6" />
-              <h3 className="text-lg font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Internal Advocacy: 34%</h3>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed text-left">
-                Employee referrals remain a primary driver. This internal advocacy complements our brand pull, proving our workforce acts as a lead ambassador network.
+            <Card className="border-t-4 border-navy-600 bg-slate-50/50 text-left">
+              <HeartHandshake size={32} className="text-navy-600 mb-4 text-left" />
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight">Internal Advocacy: 34%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+                1 in 3 hires referred by staff, ensuring high cultural fit and reduced sourcing costs.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-orange-500 bg-slate-50/50">
-              <Zap size={36} className="text-orange-500 mb-6" />
-              <h3 className="text-lg font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Gen Z Rise: 28%</h3>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed text-left">
-                Notable growth in Gen Z hires (28%) injects innate technological fluency into the organization, securing future-ready adaptability.
+            <Card className="border-t-4 border-orange-500 bg-slate-50/50 text-left">
+              <Zap size={32} className="text-orange-500 mb-4 text-left" />
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Gen Z Rise: 28%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+                Strong growth in Gen Z hiring secures our technological fluency and long-term innovation pipeline.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-emerald-600 bg-slate-50/50">
-              <GraduationCap size={36} className="text-emerald-600 mb-6" />
-              <h3 className="text-lg font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Academic Focus: 54%</h3>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed text-left">
-                The rise in Tier-1 university graduates is the direct result of our prioritized focus on high-potential junior talent from leading institutions.
+            <Card className="border-t-4 border-emerald-600 bg-slate-50/50 text-left text-left">
+              <GraduationCap size={32} className="text-emerald-600 mb-4 text-left" />
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Top-Tier Focus: 54%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+                Strategic hiring focus on elite institutions increased Top-Tier intake, specifically targeting high-potential Juniors.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-purple-500 bg-slate-50/50">
-              <Award size={36} className="text-purple-500 mb-6" />
-              <h3 className="text-lg font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Adv. Degrees: 25%</h3>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed text-left text-left text-left">
-                Maintaining a strong technical foundation, 1 in every 4 hires now holds an MSc or PhD degree, strengthening our specialized expertise.
+            <Card className="border-t-4 border-purple-500 bg-slate-50/50 text-left text-left">
+              <Award size={32} className="text-purple-500 mb-4 text-left" />
+              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left">Adv. Degrees: 25%</h3>
+              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left">
+                25% of recruits hold an MSc or PhD degree, strengthening our core research and technical capabilities.
               </p>
             </Card>
           </div>
         </div>
 
-        {/* SECTION 01: SOURCING & ALLOCATION */}
-        <section className="mb-24 text-left">
-          <SectionHeader num="01" title="Sourcing Strategy & Unit Allocation" icon={LayoutDashboard} />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-left">
-            <Card className="flex-row items-center gap-5 py-6">
-              <div className="bg-[#1e3a8a] p-3 rounded-xl text-white shadow-sm"><Users size={24} /></div>
-              <div className="text-left text-left">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Total Organization Hires 2025</span>
-                <span className="text-4xl font-black text-[#1e3a8a]">80</span>
-              </div>
-            </Card>
-            <Card className="flex-row items-center gap-5 py-6 opacity-60 grayscale border-dashed text-left">
-              <div className="bg-slate-200 p-3 rounded-xl text-slate-400"><Users size={24} /></div>
-              <div className="text-left text-left">
-                <span className="text-[10px] font-bold uppercase tracking-widest block mb-1 text-slate-500">Previous Year Total (2024)</span>
-                <span className="text-4xl font-black block text-slate-500">75</span>
-              </div>
-            </Card>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 text-left">
-            <Card>
-              <h3 className="text-lg font-bold mb-8 flex items-center gap-2 text-slate-800 uppercase text-left"><Magnet size={20} className="text-blue-900"/> Sourcing Channel Analysis</h3>
-              <div className="h-[400px] w-full text-left">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={sourcingData} margin={{ top: 40, bottom: 20 }} barGap={15}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontWeight: 600, fontSize: 11}} />
-                    <YAxis hide domain={[0, 100]} />
-                    <Tooltip cursor={{fill: '#f8fafc'}} />
-                    <Legend verticalAlign="top" align="right" wrapperStyle={{paddingBottom: '20px'}} />
-                    <Bar name="2025" dataKey="2025" fill={COLORS.navy} radius={[6, 6, 0, 0]} barSize={32}>
-                      <LabelList content={<CustomLabel />} />
-                    </Bar>
-                    <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[6, 6, 0, 0]} barSize={32}>
-                      <LabelList content={<CustomLabel />} />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </Card>
-
-            <Card>
-              <h3 className="text-lg font-bold mb-8 flex items-center gap-2 text-slate-800 uppercase text-left"><Building2 size={20} className="text-emerald-600"/> Organization Allocation</h3>
-              <div className="h-[400px] w-full text-left">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={destinationData} margin={{ top: 40, bottom: 20 }} barGap={15}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontWeight: 600, fontSize: 11}} />
-                    <YAxis hide domain={[0, 100]} />
-                    <Tooltip cursor={{fill: '#f8fafc'}} />
-                    <Legend verticalAlign="top" align="right" wrapperStyle={{paddingBottom: '20px'}} />
-                    <Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[6, 6, 0, 0]} barSize={32}>
-                      <LabelList content={<CustomLabel />} />
-                    </Bar>
-                    <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[6, 6, 0, 0]} barSize={32}>
-                      <LabelList content={<CustomLabel />} />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              
-              <div className="border-t border-slate-100 pt-6 mt-4 text-left">
-                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">R&D Unit Distribution (2025)</h4>
-                <div className="grid grid-cols-1 gap-3">
-                  {rdUnitData.map(unit => (
-                    <div key={unit.name} className="bg-slate-50 p-3 rounded-xl flex items-center justify-between border border-slate-100 text-left">
-                      <div className="flex items-center gap-3 text-left">
-                        <div className="w-2 h-8 rounded-full" style={{backgroundColor: unit.color}}></div>
-                        <div className="text-left">
-                          <p className="text-xs font-bold text-slate-800 uppercase">{unit.name}</p>
-                          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Detailed Split</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="flex flex-col text-right">
-                          <span className="text-xs font-black text-slate-800 uppercase">{unit.ofRD.toFixed(1)}% <span className="text-[8px] font-bold text-slate-400">OF R&D</span></span>
-                          <span className="text-[10px] font-bold text-slate-500 uppercase">{unit.ofTotal.toFixed(1)}% <span className="text-[8px] font-bold text-slate-400">OF TOTAL</span></span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          </div>
-        </section>
-
-        {/* SECTION 02: WORKFORCE COMPOSITION */}
-        <section className="mb-24 text-left text-left">
-          <SectionHeader num="02" title="Workforce Composition & Expertise" icon={GraduationCap} />
-          
-          <Card className="mb-12 items-start text-left">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start w-full">
-              
-              <div className="space-y-8 text-left">
-                <div className="flex items-center gap-3 text-left text-left">
-                  <div className="bg-blue-900 text-white p-2 rounded-xl text-left"><Users size={20} /></div>
-                  <h3 className="text-lg font-bold text-slate-800 uppercase tracking-tight text-left">Gender Balance (2025)</h3>
-                </div>
-
-                <div className="space-y-6 pt-2 text-left">
-                  <div className="flex justify-between items-end mb-2 text-left">
-                    <div className="flex items-center gap-2 text-left">
-                      <User size={18} className="text-blue-900" />
-                      <span className="text-sm font-bold text-slate-700 uppercase">Males</span>
-                    </div>
-                    <span className="text-3xl font-black text-blue-900 text-right">{genderStats.male2025}%</span>
-                  </div>
-
-                  <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden flex text-left">
-                    <div className="h-full bg-blue-900 transition-all duration-1000" style={{ width: `${genderStats.male2025}%` }}></div>
-                    <div className="h-full bg-orange-500 transition-all duration-1000" style={{ width: `${genderStats.female2025}%` }}></div>
-                  </div>
-
-                  <div className="flex justify-between items-center mt-2 text-left">
-                    <div className="flex items-center gap-2 text-left">
-                      <UserCheck size={18} className="text-orange-500" />
-                      <span className="text-sm font-bold text-slate-700 uppercase text-left">Females</span>
-                    </div>
-                    <span className="text-3xl font-black text-orange-500 text-right">{genderStats.female2025}%</span>
+        {/* SECTION 01: SOURCING */}
+        <section className="mb-24">
+          <SectionHeader num="01" title="Strategic Deployment & Channels" icon={LayoutDashboard} />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch text-left">
+            <div className="lg:col-span-8 text-left">
+              <Card>
+                <div className="flex justify-between items-center mb-8 text-left">
+                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left"><Magnet size={18} className="text-blue-900 text-left"/> Sourcing Breakdown</h3>
+                  <div className="flex gap-4">
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase">2025</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase">2024</span></div>
                   </div>
                 </div>
-
-                <div className="flex items-center gap-2 text-slate-400 italic pt-4 border-t border-slate-50 text-left">
-                  <CheckCircle size={14} className="text-emerald-500" />
-                  <span className="text-xs font-semibold text-left">Stability Note: Gender ratio remains consistent with previous performance.</span>
-                </div>
-              </div>
-
-              <div className="space-y-8 text-left">
-                <div className="flex items-center gap-3 text-left">
-                  <div className="bg-orange-600 text-white p-2 rounded-xl text-left"><TrendingUp size={20} /></div>
-                  <h3 className="text-lg font-bold text-slate-800 uppercase tracking-tight text-left">Workforce Maturity</h3>
-                </div>
-
-                <div className="bg-slate-50 p-10 rounded-[2rem] border border-slate-100 relative overflow-hidden text-left">
-                  <div className="relative z-10 text-left">
-                    <span className="text-[11px] font-black text-slate-400 uppercase block mb-2 tracking-widest text-left">Organization Average Age</span>
-                    <div className="flex items-baseline gap-3 text-left text-left text-left">
-                      <span className="text-6xl font-black text-blue-900 leading-none text-left">{ageStats.global2025}</span>
-                      <span className="text-sm font-bold text-slate-400 text-left">YEARS</span>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-10 flex items-center justify-between border-t border-slate-200/50 pt-6 text-left">
-                    <div className="text-left text-left">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase block mb-1">Previous Year (2024 Baseline)</span>
-                      <span className="text-xl font-bold text-slate-400 italic text-left">{ageStats.global2024}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </Card>
-
-          {/* Academic Background */}
-          <Card className="mb-12 text-left">
-            <div className="flex flex-col lg:flex-row gap-12 text-left">
-              <div className="flex-1 w-full text-left">
-                <h3 className="text-lg font-bold mb-8 flex items-center gap-2 text-slate-800 uppercase text-left"><GraduationCap size={20} className="text-emerald-700"/> Academic Origin Analysis</h3>
-                <div className="h-[350px] w-full text-left text-left">
+                <div className="h-[300px] w-full text-left">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={eduData} margin={{ top: 40, bottom: 20 }} barGap={15}>
+                    <BarChart data={sourcingData} margin={{ top: 20, bottom: 0 }} barGap={12}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontWeight: 600, fontSize: 10}} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: COLORS.slate950, fontWeight: 700, fontSize: 10}} />
                       <YAxis hide domain={[0, 100]} />
                       <Tooltip cursor={{fill: '#f8fafc'}} />
-                      <Legend verticalAlign="top" align="right" wrapperStyle={{paddingBottom: '20px'}} />
-                      <Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[6, 6, 0, 0]} barSize={28}>
+                      <Bar name="2025" dataKey="2025" fill={COLORS.navy} radius={[4, 4, 0, 0]} barSize={45}>
                         <LabelList content={<CustomLabel />} />
                       </Bar>
-                      <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[6, 6, 0, 0]} barSize={28}>
+                      <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={45}>
                         <LabelList content={<CustomLabel />} />
                       </Bar>
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                
-                <div className="mt-8 pt-6 border-t border-slate-100 text-left text-left text-left">
-                  <p className="text-[11px] text-slate-500 font-bold leading-relaxed flex items-start gap-2 text-left">
-                      <span className="text-blue-900 text-lg mt-[-4px]">*</span>
-                      <span className="text-left">The <strong>"NON-DEGREE / EXP"</strong> category represents hires without formal academic degrees who bring significant practical experience, or hold specialized industry certificates.</span>
-                  </p>
-                </div>
-              </div>
-              
-              <div className="w-full lg:w-96 flex flex-col gap-6 text-left">
-                <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-left">
-                  <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-                    <Star size={14} className="text-orange-500" /> Top Institutions (2025)
-                  </h4>
-                  <ul className="space-y-6 text-left">
-                    {top3_2025.map((uni, i) => (
-                      <li key={i} className="flex gap-4 items-center text-left text-left">
-                        <span className="text-blue-900 font-black text-xl w-6 text-left">{i+1}.</span>
-                        <div className="text-left">
-                          <p className="text-base font-black text-slate-800 uppercase leading-none mb-1 text-left">{uni.name}</p>
-                          <span className="text-blue-900 font-black text-xs uppercase tracking-wider text-left block">
-                            {uni.value.toFixed(1)}% OF ANNUAL INTAKE
-                          </span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              </Card>
             </div>
-          </Card>
+            
+            <div className="lg:col-span-4 text-left">
+              <Card className="bg-slate-100 border-none text-slate-950 text-left">
+                <div className="flex items-center gap-3 mb-6 text-left text-left">
+                  <HeartHandshake className="text-blue-900 text-left" size={24} />
+                  <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left">Internal Branding</h4>
+                </div>
+                <div className="space-y-6 text-left">
+                  <div>
+                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                      Our 2nd strongest recruitment channel is <span className="text-blue-900 font-black italic">"Refer-a-Friend."</span> This proves the brand is exceptionally strong from within, where employees act as our primary ambassadors.
+                    </p>
+                  </div>
+                  <div className="pt-6 border-t border-slate-300 text-left">
+                    <div className="flex items-center gap-2 mb-3 text-left">
+                       <TrendingUp className="text-emerald-600 text-left" size={18} />
+                       <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left">Economic Impact</h4>
+                    </div>
+                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                      High cultural alignment via internal networks allows us to maintain a low agency dependency (5%) and significantly reduced recruitment expenditure.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
 
-          {/* Seniority Profile */}
-          <Card className="mb-16 text-left">
-            <div className="flex flex-col lg:flex-row gap-12 text-left">
-              <div className="flex-1 w-full text-left">
-                <h3 className="text-lg font-bold mb-8 flex items-center gap-2 text-slate-800 uppercase text-left"><History size={20} className="text-blue-900"/> Professional Seniority (2025)</h3>
-                <div className="space-y-8 py-4 text-left">
+        {/* SECTION 02: QUALITY & DNA */}
+        <section className="mb-24 text-left">
+          <SectionHeader num="02" title="Talent Quality & DNA" icon={Award} />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 text-left">
+            <div className="lg:col-span-8">
+              <Card>
+                <div className="flex justify-between items-center mb-8 text-left">
+                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left"><GraduationCap size={18} className="text-emerald-700 text-left"/> Academic Tier Shift</h3>
+                  <div className="flex gap-4">
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#0d9488]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left">2025</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left">2024</span></div>
+                  </div>
+                </div>
+                <div className="h-[280px] w-full text-left">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={eduData} margin={{ top: 20, bottom: 0 }} barGap={12}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: COLORS.slate950, fontWeight: 700, fontSize: 10}} />
+                      <YAxis hide domain={[0, 100]} />
+                      <Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={35}>
+                        <LabelList content={<CustomLabel />} />
+                      </Bar>
+                      <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={35}>
+                        <LabelList content={<CustomLabel />} />
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </Card>
+            </div>
+
+            <div className="lg:col-span-4 flex flex-col gap-6 text-left text-left text-left">
+              <Card className="bg-slate-100 border-none text-slate-950 text-left">
+                <h4 className="text-xs font-black text-slate-950 uppercase tracking-widest mb-6 flex items-center gap-2 text-left"><Star size={14} className="text-orange-500 text-left" /> Top Institutions 2025</h4>
+                <div className="space-y-4 mb-6 text-left">
+                  {top3_2025.map((uni, i) => (
+                    <div key={i} className="flex justify-between items-center p-3 bg-white rounded-xl border border-slate-100">
+                      <span className="text-xs font-black text-slate-800 uppercase text-left">{i+1}. {uni.name}</span>
+                      <span className="text-xs font-black text-blue-900 text-left">{uni.value}%</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left text-left">
+            <div className="lg:col-span-7">
+              <Card>
+                <h3 className="text-sm font-black mb-8 flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left"><History size={18} className="text-blue-900 text-left"/> Professional Seniority (2025)</h3>
+                <div className="space-y-6">
                   {seniorityStats.map((item, idx) => (
-                    <div key={idx} className="space-y-2 text-left text-left">
-                      <div className="flex justify-between items-end text-left text-left">
-                        <span className="text-xs font-bold text-slate-700 uppercase tracking-wide text-left">{item.label}</span>
-                        <span className="text-sm font-black text-slate-900 text-right">{item.value.toFixed(1)}%</span>
+                    <div key={idx} className="space-y-2 text-left">
+                      <div className="flex justify-between text-[10px] font-bold text-slate-700 uppercase text-left text-left">
+                        <span>{item.label}</span>
+                        <span>{item.value.toFixed(1)}%</span>
                       </div>
-                      <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden text-left">
-                        <div 
-                          className="h-full rounded-full transition-all duration-1000 ease-out" 
-                          style={{ width: `${item.value}%`, backgroundColor: item.color, boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)' }}
-                        />
+                      <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden text-left">
+                        <div className="h-full rounded-full transition-all duration-1000 text-left text-left text-left" style={{ width: `${item.value}%`, backgroundColor: item.color }} />
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
+            </div>
 
-              <div className="w-full lg:w-1/2 bg-slate-50 p-8 rounded-[2rem] border border-slate-100 text-left flex flex-col justify-center text-left">
-                <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-                  <Lightbulb size={16} className="text-emerald-600" /> Strategic Experience Analysis
-                </h4>
-                <div className="space-y-8 text-left text-left">
+            <div className="lg:col-span-5 text-left text-left text-left">
+              <Card className="bg-slate-100 border-none text-slate-950 text-left text-left">
+                <div className="flex items-center gap-3 mb-6 text-left text-left text-left">
+                  <ShieldCheck className="text-blue-900 text-left" size={24} />
+                  <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left">Mentorship Index</h4>
+                </div>
+                <div className="space-y-6 text-left text-left">
                   <div className="flex gap-4 text-left">
-                    <div className="mt-1 shrink-0"><CheckCircle size={14} className="text-emerald-500" /></div>
+                    <span className="text-5xl font-black text-blue-900 text-left">2.3:1</span>
                     <div className="text-left text-left">
-                      <p className="text-sm font-black text-slate-800 uppercase mb-1">Seniority Density: 2.3 to 1</p>
-                      <p className="text-[11px] text-slate-600 font-medium leading-relaxed italic text-left">
-                        For every Junior hired, we recruited 2.3 Senior professionals (5+ years exp.), ensuring a strong mentorship structure and technical stability.
+                      <p className="text-[10px] font-black text-slate-500 uppercase mb-1 text-left">Seniority Density</p>
+                      <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                        We onboarded 2.3 experienced professionals (5+ yr) for every junior entry.
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-4 text-left">
-                    <div className="mt-1 shrink-0"><CheckCircle size={14} className="text-emerald-500" /></div>
-                    <div className="text-left text-left">
-                      <p className="text-sm font-black text-slate-800 uppercase mb-1">Talent Succession</p>
-                      <p className="text-[11px] text-slate-600 font-medium leading-relaxed italic text-left text-left">
-                        The 21.3% early-career entry rate supports long-term knowledge transfer and sustainable organic growth across the organization.
-                      </p>
-                    </div>
+                  <div className="pt-6 border-t border-slate-300 text-left text-left">
+                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left">
+                      This ratio preserves technical integrity and guarantees high-quality onboarding for our entry-level pipeline.
+                    </p>
                   </div>
                 </div>
-              </div>
+              </Card>
             </div>
-          </Card>
-        </section>
-
-        {/* SECTION 03: HUB PERFORMANCE COMPARISON */}
-        <section className="mb-24 text-left text-left">
-          <SectionHeader num="03" title="Hub Performance Comparison" icon={MapPin} />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch text-left">
-            {/* Kfar Saba */}
-            <Card className="border-t-4 border-[#1e3a8a] text-left">
-              <div className="flex justify-between items-start mb-6 text-left">
-                <h4 className="text-2xl font-black text-[#1e3a8a]">KFAR SABA</h4>
-                <div className="bg-[#1e3a8a]/10 p-2 rounded-lg text-[#1e3a8a] text-left"><Building2 size={20}/></div>
-              </div>
-              <div className="overflow-x-auto text-left">
-                <table className="w-full text-sm text-left font-medium">
-                  <thead>
-                    <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left">
-                      <th className="pb-3 text-left">Key Metric</th>
-                      <th className="pb-3 text-right">2025 Perf.</th>
-                      <th className="pb-3 text-right opacity-50">2024 Base</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-50 font-medium text-left">
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs">Hires (Allocation)</td>
-                      <td className="py-4 text-right font-black text-blue-900">66.3%</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">68.0%</td>
-                    </tr>
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs">Average Age</td>
-                      <td className="py-4 text-right font-black text-blue-900 text-right">36.7</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">37.2</td>
-                    </tr>
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs text-left">Mid-Level+ (%)</td>
-                      <td className="py-4 text-right font-black text-blue-900 text-right">67.9%</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">65.0%</td>
-                    </tr>
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs text-left">Top-Tier Grad (%)</td>
-                      <td className="py-4 text-right font-black text-blue-900 text-right">56.6%</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">52.0%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-
-            {/* North Hub */}
-            <Card className="border-t-4 border-emerald-600 text-left text-left">
-              <div className="flex justify-between items-start mb-6 text-left">
-                <h4 className="text-2xl font-black text-emerald-700 uppercase text-left">North Hub</h4>
-                <div className="bg-emerald-50 p-2 rounded-lg text-emerald-700 text-left"><MapPin size={20}/></div>
-              </div>
-              <div className="overflow-x-auto text-left">
-                <table className="w-full text-sm text-left font-medium">
-                  <thead>
-                    <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left">
-                      <th className="pb-3 text-left">Key Metric</th>
-                      <th className="pb-3 text-right">2025 Perf.</th>
-                      <th className="pb-3 text-right opacity-50 text-right">2024 Base</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-50 font-medium text-left">
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs text-left">Hires (Allocation)</td>
-                      <td className="py-4 text-right font-black text-emerald-700 text-right">33.7%</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">32.0%</td>
-                    </tr>
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs text-left">Average Age</td>
-                      <td className="py-4 text-right font-black text-emerald-700 text-right">35.9</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">36.5</td>
-                    </tr>
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs text-left">Mid-Level+ (%)</td>
-                      <td className="py-4 text-right font-black text-emerald-700 text-right">66.7%</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">64.0%</td>
-                    </tr>
-                    <tr>
-                      <td className="py-4 text-slate-600 uppercase text-xs text-left">Top-Tier Grad (%)</td>
-                      <td className="py-4 text-right font-black text-emerald-700 text-right">48.1%</td>
-                      <td className="py-4 text-right opacity-50 font-bold text-right">44.0%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </Card>
           </div>
         </section>
 
-        {/* FOOTER */}
-        <footer className="border-t border-slate-100 pt-8 pb-10 flex justify-between items-center text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] text-left">
-          <span>Executive Summary 2025 • Recruitment Intelligence Unit</span>
+        {/* SECTION 03: SITE METRICS BREAKDOWN (FULLY VERIFIED) */}
+        <section className="mb-24 text-left text-left">
+          <SectionHeader num="03" title="Site Metrics Comparison" icon={MapPin} />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-10 text-left text-left text-left">
+            <Card className="border-t-4 border-[#1e3a8a] text-left">
+              <h4 className="text-xl font-black text-[#1e3a8a] mb-6 uppercase flex justify-between items-center text-left">Kfar Saba Site <Building2 size={20}/></h4>
+              <table className="w-full text-sm text-left font-medium text-left text-left">
+                <thead>
+                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left">
+                    <th className="pb-3 text-left text-left">Metric</th>
+                    <th className="pb-3 text-right">2025 Perf.</th>
+                    <th className="pb-3 text-right opacity-70">2024 Base</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50 text-left">
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-blue-900 text-right text-right">66.3%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right">77.3%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right">38.2</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right">39.0</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right">58.6%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-left text-left">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">52.0%</td></tr>
+                </tbody>
+              </table>
+            </Card>
+
+            <Card className="border-t-4 border-emerald-600 text-left text-left text-left">
+              <h4 className="text-xl font-black text-emerald-700 mb-6 uppercase flex justify-between items-center text-left text-left">North Hub <MapPin size={20}/></h4>
+              <table className="w-full text-sm text-left font-medium text-left text-left text-left">
+                <thead>
+                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left">
+                    <th className="pb-3 text-left text-left">Metric</th>
+                    <th className="pb-3 text-right">2025 Perf.</th>
+                    <th className="pb-3 text-right opacity-70">2024 Base</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50 text-left text-left">
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right">33.7%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right">22.7%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right">33.0</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">30.5</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right">37.0%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right">17.6%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right">48.1%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right">23.5%</td></tr>
+                </tbody>
+              </table>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+            {hubInsights.map((insight, idx) => (
+              <div key={insight.title} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex gap-4 text-left">
+                <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 text-left text-left text-left"><Info size={18} /></div>
+                <div className="text-left text-left text-left text-left">
+                  <h5 className="font-black text-slate-800 text-xs uppercase mb-1 text-left">{insight.title}</h5>
+                  <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left">{insight.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* פוטר */}
+        <footer className="border-t border-slate-100 pt-8 pb-10 flex justify-between items-center text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] text-left text-left">
+          <span>Israel Recruitment Intelligence • 2025 CEO Annual Review</span>
           <span>© Talent Analytics Suite</span>
         </footer>
       </div>
