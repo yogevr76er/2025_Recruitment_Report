@@ -253,13 +253,13 @@ const App = () => {
                   
         {/* SECTION 02: ALLOCATION & DEMOGRAPHICS */}
         <section className="mb-24 text-left text-left text-left text-left">
-          <SectionHeader num="02" title="Organizational Focus & Demographics" icon={Target} />
+          <SectionHeader num="02" title="ORGANIZATIONAL ALLOCATION & DEMOGRAPHICS" icon={Target} />
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left text-left text-left">
             
             <div className="lg:col-span-7 text-left text-left text-left">
               <Card>
                 <div className="flex justify-between items-center mb-8 text-left text-left text-left text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left"><Target size={18} className="text-blue-900 text-left text-left"/> R&D Allocation Strategy</h3>
+                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left"><Target size={18} className="text-blue-900 text-left text-left"/> ORGANIZATIONAL ALLOCATION</h3>
                   <div className="flex gap-4">
                     <div className="flex items-center gap-1.5 text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left">2025</span></div>
                     <div className="flex items-center gap-1.5 text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left">2024</span></div>
@@ -312,7 +312,7 @@ const App = () => {
             <div className="lg:col-span-12 text-left text-left text-left text-left">
               <Card>
                 <div className="flex justify-between items-center mb-10 text-left text-left text-left text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left"><History size={18} className="text-blue-900 text-left text-left"/> Generational Distribution</h3>
+                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left"><History size={18} className="text-blue-900 text-left text-left"/> GENERATIONAL COMPOSITION</h3>
                   <div className="flex gap-4">
                     <div className="flex items-center gap-1.5 text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left">2025</span></div>
                     <div className="flex items-center gap-1.5 text-left text-left text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left">2024</span></div>
@@ -341,7 +341,7 @@ const App = () => {
                       <div className="p-2 bg-blue-50 rounded-lg text-blue-900 shrink-0"><Smartphone size={20} /></div>
                       <div className="text-left text-left text-left text-left">
                         <span className="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-1 text-left text-left">Gen Z (1997-2012) • 28%</span>
-                        <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left">Digital natives bringing innate tech fluency and ensuring long-term pipeline sustainability.</p>
+                        <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left">Growing Gen Z presence (28%) drives technology adoption and innovation capacity while extending pipeline sustainability.</p>
                       </div>
                     </div>
                     <div className="flex gap-4 items-start text-left text-left text-left">
@@ -432,22 +432,18 @@ const App = () => {
             <Card className="bg-slate-100 border-none text-slate-950 text-left text-left text-left text-left">
               <div className="flex items-center gap-3 mb-6 text-left text-left text-left text-left text-left">
                 <ShieldCheck className="text-blue-900 text-left text-left text-left text-left text-left text-left" size={24} />
-                <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left text-left text-left text-left">Mentorship Index</h4>
+                <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left text-left text-left text-left">SENIORITY RATIO</h4>
               </div>
               <div className="space-y-6 text-left text-left text-left text-left text-left">
                 <div className="flex gap-4 text-left text-left text-left text-left text-left">
                   <span className="text-5xl font-black text-blue-900 text-left text-left text-left text-left text-left">1.85:1</span>
                   <div className="text-left text-left text-left text-left text-left text-left text-left text-left">
-                    <p className="text-[10px] font-black text-slate-500 uppercase mb-1 text-left text-left text-left text-left text-left text-left text-left">Seniority Density</p>
                     <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left">
-                      We onboarded 1.85 experienced professionals (5+ yr) for every junior entry (0-2 yr).
+                      We onboarded 1.85 experienced professionals (5+ yr) for every junior entry (0-2 yr), maintaining balanced experience distribution across technical teams.
                     </p>
                   </div>
                 </div>
                 <div className="pt-6 border-t border-slate-300 text-left text-left text-left text-left text-left">
-                  <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left">
-                    This ratio preserves technical integrity and guarantees high-quality onboarding for our entry-level pipeline.
-                  </p>
                 </div>
               </div>
             </Card>
