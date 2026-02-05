@@ -69,10 +69,10 @@ const top3_2025 = [
 ];
 
 const seniorityStats = [
-  { label: 'Staff & Principal (10+ Years)', value: 28.5, color: COLORS.navy },
+  { label: 'EXPERT LEVEL (10+ Years)', value: 28.5, color: COLORS.navy },
   { label: 'Senior Level (5-10 Years)', value: 18.8, color: COLORS.emerald },
   { label: 'Mid-Level (2-5 Years)', value: 22.5, color: COLORS.blue },
-  { label: 'Junior & Entry (0-2 Years)', value: 30.0, color: COLORS.orange },
+  { label: 'ENTRY LEVEL (0-2 Years)', value: 30.0, color: COLORS.orange },
 ];
 
 const hubInsights = [
@@ -413,7 +413,7 @@ const App = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-left text-left text-left text-left">
             <Card className="text-left text-left text-left text-left text-left">
-              <h3 className="text-sm font-black mb-8 flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><History size={18} className="text-blue-900 text-left text-left text-left text-left"/> Professional Seniority (2025)</h3>
+              <h3 className="text-sm font-black mb-8 flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><History size={18} className="text-blue-900 text-left text-left text-left text-left"/> EXPERIENCE LEVELS (2025)</h3>
               <div className="space-y-6 text-left text-left text-left text-left text-left">
                 {seniorityStats.map((item, idx) => (
                   <div key={idx} className="space-y-2 text-left text-left text-left text-left text-left text-left">
@@ -467,7 +467,7 @@ const App = () => {
                 <tbody className="divide-y divide-slate-50 text-left text-left text-left text-left text-left">
                   <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right">66.3%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">77.3%</td></tr>
                   <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right">36.7</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">38.3</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">67.2%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left">SENIOR & EXPERT (5+ yr)</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">67.2%</td></tr>
                   <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right text-left text-left">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-left text-left">51.8%</td></tr>
                 </tbody>
               </table>
@@ -486,7 +486,7 @@ const App = () => {
                 <tbody className="divide-y divide-slate-50 text-left text-left text-left text-left text-left text-left">
                   <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right">33.7%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">22.7%</td></tr>
                   <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right">35.7</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">30.5</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">Senior Level+ (5+ yr)*</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right">51.85%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right">29.4%</td></tr>
+                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">SENIOR & EXPERT (5+ yr)</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right">51.85%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right">29.4%</td></tr>
                   <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right">48.1%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-left text-left">23.5%</td></tr>
                 </tbody>
               </table>
