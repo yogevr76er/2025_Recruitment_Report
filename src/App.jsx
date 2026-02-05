@@ -242,24 +242,10 @@ const App = () => {
                 <div className="space-y-6 text-left text-left text-left text-left text-left">
                   <div>
                     <p className="text-xs leading-relaxed font-normal text-slate-950 text-left text-left text-left">
-                      Our 2nd strongest recruitment channel is <span className="text-blue-900 font-black italic">"Refer-a-Friend."</span> This proves the brand is exceptionally strong from within, where employees act as our primary ambassadors.
+                    Employee referrals represent 34% of total hires—the second-largest source behind direct applications. High referral rates typically correlate with strong internal satisfaction and workplace advocacy.
                     </p>
                   </div>
-                  <div className="pt-6 border-t border-slate-300 text-left text-left text-left text-left">
-                    <div className="flex items-center gap-2 mb-3 text-left text-left text-left">
-                       <TrendingUp className="text-emerald-600 text-left text-left" size={18} />
-                       <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left text-left">Economic Impact</h4>
-                    </div>
-                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left text-left text-left">
-                      High cultural alignment via internal networks allows us to maintain a low agency dependency (5%) and significantly reduced recruitment expenditure.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </section>
-
+                  
         {/* SECTION 02: ALLOCATION & DEMOGRAPHICS */}
         <section className="mb-24 text-left text-left text-left text-left">
           <SectionHeader num="02" title="Organizational Focus & Demographics" icon={Target} />
@@ -381,7 +367,7 @@ const App = () => {
             <div className="lg:col-span-8 text-left text-left text-left text-left">
               <Card>
                 <div className="flex justify-between items-center mb-8 text-left text-left text-left text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left"><GraduationCap size={18} className="text-emerald-700 text-left text-left text-left text-left"/> Academic Tier Shift</h3>
+                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left"><GraduationCap size={18} className="text-emerald-700 text-left text-left text-left text-left"/> ACADEMIC BACKGROUND</h3>
                   <div className="flex gap-4 text-left text-left text-left">
                     <div className="flex items-center gap-1.5 text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#0d9488]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left text-left">2025</span></div>
                     <div className="flex items-center gap-1.5 text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left text-left">2024</span></div>
