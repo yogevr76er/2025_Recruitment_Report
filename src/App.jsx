@@ -245,6 +245,11 @@ const App = () => {
                     Employee referrals represent 34% of total hires—the second-largest source behind direct applications. High referral rates typically correlate with strong internal satisfaction and workplace advocacy.
                     </p>
                   </div>
+                  </div>
+              </Card>
+            </div>
+          </div>
+        </section>
                   
         {/* SECTION 02: ALLOCATION & DEMOGRAPHICS */}
         <section className="mb-24 text-left text-left text-left text-left">
