@@ -77,12 +77,11 @@ const seniorityStats = [
 
 const hubInsights = [
   {
-    title: "North Hub Maturity Transition",
-    detail: "The North site continues to trend toward higher professional seniority, with a significant increase in Senior Level (5+ yr) hires from 29.4% to 51.8%. This shift establishes a more robust and self-sufficient engineering core."
-  },
-  {
-    title: "Strategic Scaling & Quality focus",
-    detail: "Expansion of the North hub (rising to 33.7% of total hires) was achieved alongside a significant rise in Top-Tier university graduates. This indicates successful site growth while elevating the technical recruitment bar."
+    title: "NORTH HUB GROWTH & MATURATION",
+    details: [
+      "The North site continues to trend toward higher professional seniority, with a significant increase in Senior Level (5+ yr) hires from 29.4% to 51.8%. This shift establishes a more mature and self-sufficient engineering foundation.",
+      "Expansion of the North hub (rising to 33.7% of total hires) was achieved alongside a significant rise in Top-Tier university graduates (23.5% to 48.1%), reflecting targeted campus recruitment efforts."
+    ]
   }
 ];
 
@@ -499,7 +498,15 @@ const App = () => {
                 <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 text-left text-left text-left text-left text-left text-left text-left text-left text-left"><Info size={18} /></div>
                 <div className="text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
                   <h5 className="font-black text-slate-800 text-xs uppercase mb-1 text-left text-left text-left text-left text-left text-left text-left text-left">{insight.title}</h5>
-                  <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left">{insight.detail}</p>
+                  {insight.details ? (
+                    <div className="space-y-3">
+                      {insight.details.map((para, i) => (
+                        <p key={i} className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left-left text-left text-left text-left text-left text-left text-left">{para}</p>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left">{insight.detail}</p>
+                  )}
                 </div>
               </div>
             ))}
