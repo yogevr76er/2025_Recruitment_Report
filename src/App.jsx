@@ -492,22 +492,25 @@ const App = () => {
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left text-left text-left text-left text-left text-left text-left text-left">
+          <div className="text-left text-left text-left text-left text-left text-left text-left text-left">
             {hubInsights.map((insight, idx) => (
-              <div key={insight.title} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex gap-4 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-                <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 text-left text-left text-left text-left text-left text-left text-left text-left text-left"><Info size={18} /></div>
-                <div className="text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-                  <h5 className="font-black text-slate-800 text-xs uppercase mb-1 text-left text-left text-left text-left text-left text-left text-left text-left">{insight.title}</h5>
-                  {insight.details ? (
-                    <div className="space-y-3">
-                      {insight.details.map((para, i) => (
-                        <p key={i} className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left-left text-left text-left text-left text-left text-left text-left">{para}</p>
-                      ))}
-                    </div>
-                  ) : (
+              <div key={insight.title} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                <h5 className="font-black text-slate-800 text-xs uppercase mb-4 text-left text-left text-left text-left text-left text-left text-left text-left">{insight.title}</h5>
+                {insight.details ? (
+                  <div className="space-y-4">
+                    {insight.details.map((para, i) => (
+                      <div key={i} className="flex gap-4 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                        <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 shrink-0 text-left text-left text-left text-left text-left text-left text-left text-left text-left"><Info size={18} /></div>
+                        <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left">{para}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex gap-4 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                    <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 shrink-0 text-left text-left text-left text-left text-left text-left text-left text-left text-left"><Info size={18} /></div>
                     <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left">{insight.detail}</p>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
