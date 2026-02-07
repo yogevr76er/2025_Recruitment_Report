@@ -13,7 +13,67 @@ import {
 /**
  * RECRUITMENT DATA SUMMARY 2025 - ISRAEL EXECUTIVE VERSION
  * Version 42.0: Structured Generational Insights & 100% Data Validation
+ * 
+ * PDF EXPORT INSTRUCTIONS:
+ * 1. Open this page in Chrome/Edge browser
+ * 2. Press Ctrl+P (or Cmd+P on Mac)
+ * 3. Destination: Save as PDF
+ * 4. Paper size: A4
+ * 5. Margins: Default
+ * 6. Scale: 100%
+ * 7. Background graphics: ON (important!)
+ * 8. Click "Save"
  */
+
+// Add print styles
+const printStyles = `
+  @media print {
+    @page {
+      size: A4;
+      margin: 15mm;
+    }
+    
+    body {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    
+    /* Prevent page breaks inside cards */
+    .no-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    
+    /* Add page breaks before sections */
+    section {
+      page-break-before: auto;
+    }
+    
+    /* Hide elements not needed in print */
+    .no-print {
+      display: none !important;
+    }
+    
+    /* Ensure backgrounds print */
+    div, section, article {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+`;
+
+// Inject print styles into document
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = printStyles;
+  document.head.appendChild(styleSheet);
+}
 
 const COLORS = {
   navy: '#1e3a8a',
@@ -98,7 +158,7 @@ const CustomLabel = (props) => {
 };
 
 const Card = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-[1.5rem] p-8 shadow-sm border border-slate-100 h-full flex flex-col ${className}`}>
+  <div className={`bg-white rounded-[1.5rem] p-8 shadow-sm border border-slate-100 h-full flex flex-col no-break ${className}`}>
     {children}
   </div>
 );
@@ -122,12 +182,83 @@ const App = () => {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-6 md:p-12 lg:p-16 relative text-left">
       <style dangerouslySetInnerHTML={{ __html: `
         @media print {
-          .print-hidden { display: none !important; }
-          body { background: white !important; padding: 0 !important; }
-          .bg-slate-50 { background: white !important; }
-          .shadow-sm, .border { box-shadow: none !important; border: 1px solid #eee !important; }
-          @page { margin: 1cm; size: auto; }
-          * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+          @page {
+            size: A4;
+            margin: 12mm 10mm;
+          }
+          
+          /* Hide print button */
+          .print-hidden {
+            display: none !important;
+          }
+          
+          /* Force exact colors */
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
+          
+          /* Clean backgrounds */
+          body {
+            background: white !important;
+            padding: 0 !important;
+            margin: 0 !important;
+          }
+          
+          .bg-slate-50 {
+            background: white !important;
+          }
+          
+          /* Preserve card styling but optimize for print */
+          .shadow-sm {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+          }
+          
+          .border {
+            border: 1px solid #e2e8f0 !important;
+          }
+          
+          /* Prevent page breaks inside important elements */
+          .no-break,
+          section,
+          article,
+          .grid > div,
+          table,
+          pre,
+          blockquote {
+            page-break-inside: avoid;
+            break-inside: avoid;
+          }
+          
+          /* Smart page breaks */
+          section {
+            page-break-before: auto;
+            page-break-after: auto;
+          }
+          
+          h1, h2, h3, h4, h5, h6 {
+            page-break-after: avoid;
+            break-after: avoid;
+          }
+          
+          /* Ensure charts render properly */
+          svg {
+            max-width: 100% !important;
+            height: auto !important;
+          }
+          
+          /* Optimize spacing for print */
+          .max-w-\\[1400px\\] {
+            max-width: 100% !important;
+            padding: 0 !important;
+          }
+          
+          /* Make text crisp */
+          body, div, span, p {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
         }
       `}} />
 
