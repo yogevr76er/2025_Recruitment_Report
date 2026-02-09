@@ -12,7 +12,7 @@ import {
 
 /**
  * RECRUITMENT DATA SUMMARY 2025 - ISRAEL EXECUTIVE VERSION
- * Version 51.0: Final Visual Polish - Seniority Insights with Bullet Points
+ * Version 52.0: Methodology Note added to Executive Overview
  */
 
 // Add print styles
@@ -200,9 +200,13 @@ const App = () => {
             Executive Strategic Outlook
           </h2>
           
-          <div className="mb-10 max-w-4xl">
+          <div className="mb-10 max-w-4xl space-y-4">
             <p style={{ color: BRAND.dark }} className="text-sm leading-relaxed font-normal">
               In 2025, recruitment activity reflected noticeable changes in sourcing mix and talent profile, while continuing to support business needs across sites and core R&D functions.
+            </p>
+            {/* Added Methodology Note on a separate line, font-normal */}
+            <p style={{ color: BRAND.dark }} className="text-sm leading-relaxed font-normal">
+              The analysis is based on internal recruitment data, with 2024 data used as a baseline for year-over-year comparison.
             </p>
           </div>
 
@@ -566,7 +570,6 @@ const App = () => {
   );
 };
 
-// Internal icon wrapper to ensure graduation cap behaves correctly
 const SafeGraduationCap = (props) => <GraduationCap {...props} />;
 
 export default App;
