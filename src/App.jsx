@@ -12,17 +12,7 @@ import {
 
 /**
  * RECRUITMENT DATA SUMMARY 2025 - ISRAEL EXECUTIVE VERSION
- * Version 42.0: Structured Generational Insights & 100% Data Validation
- * 
- * PDF EXPORT INSTRUCTIONS:
- * 1. Open this page in Chrome/Edge browser
- * 2. Press Ctrl+P (or Cmd+P on Mac)
- * 3. Destination: Save as PDF
- * 4. Paper size: A4
- * 5. Margins: Default
- * 6. Scale: 100%
- * 7. Background graphics: ON (important!)
- * 8. Click "Save"
+ * Version 51.0: Final Visual Polish - Seniority Insights with Bullet Points
  */
 
 // Add print styles
@@ -44,23 +34,19 @@ const printStyles = `
       print-color-adjust: exact !important;
     }
     
-    /* Prevent page breaks inside cards */
     .no-break {
       page-break-inside: avoid;
       break-inside: avoid;
     }
     
-    /* Add page breaks before sections */
     section {
       page-break-before: auto;
     }
     
-    /* Hide elements not needed in print */
     .no-print {
       display: none !important;
     }
     
-    /* Ensure backgrounds print */
     div, section, article {
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
@@ -68,29 +54,33 @@ const printStyles = `
   }
 `;
 
-// Inject print styles into document
 if (typeof document !== 'undefined') {
   const styleSheet = document.createElement('style');
   styleSheet.textContent = printStyles;
   document.head.appendChild(styleSheet);
 }
 
-const COLORS = {
-  navy: '#1e3a8a',
-  emerald: '#0d9488',
-  orange: '#f97316',
-  purple: '#a855f7',
-  blue: '#3b82f6',
-  slate50: '#f8fafc',
-  slate100: '#f1f5f9',
-  slate200: '#e2e8f0',
-  slate300: '#cbd5e1',
-  slate400: '#94a3b8',
-  slate950: '#020617', 
+const BRAND = {
+  orange: '#d74602',
+  dark: '#3d3935',
+  white: '#ffffff',
+  green: '#3dae2b',
+  purple: '#93358d',
+  blue: '#1a428a',
+  lightGray: '#f8fafc'
 };
 
-// --- DATA SETS (Verified against 2024/2025 CSVs) ---
+const COLORS = {
+  navy: BRAND.blue,
+  emerald: BRAND.green,
+  orange: BRAND.orange,
+  purple: BRAND.purple,
+  blue: BRAND.blue,
+  text: BRAND.dark,
+  muted: '#64748b'
+};
 
+// --- DATA SETS ---
 const sourcingData = [
   { name: 'Applied', '2025': 55.0, '2024': 34.7 },
   { name: 'Referral', '2025': 33.8, '2024': 30.7 },
@@ -124,15 +114,15 @@ const eduData = [
 
 const top3_2025 = [
   { name: "Tel-Aviv Uni", value: 13.8 },
-  { name: "Technion", value: 12.5 },
+  { name: "Technion Uni", value: 12.5 },
   { name: "Ben-Gurion Uni", value: 11.3 }
 ];
 
 const seniorityStats = [
-  { label: 'EXPERT LEVEL (10+ Years)', value: 28.5, color: COLORS.navy },
-  { label: 'Senior Level (5-10 Years)', value: 18.8, color: COLORS.emerald },
-  { label: 'Mid-Level (2-5 Years)', value: 22.5, color: COLORS.blue },
-  { label: 'ENTRY LEVEL (0-2 Years)', value: 30.0, color: COLORS.orange },
+  { label: 'EXPERT LEVEL (10+ Years)', value: 28.5, color: BRAND.blue },
+  { label: 'Senior Level (5-10 Years)', value: 18.8, color: BRAND.green },
+  { label: 'Mid-Level (2-5 Years)', value: 22.5, color: BRAND.purple },
+  { label: 'ENTRY LEVEL (0-2 Years)', value: 30.0, color: BRAND.orange },
 ];
 
 const hubInsights = [
@@ -145,13 +135,11 @@ const hubInsights = [
   }
 ];
 
-// --- UI COMPONENTS ---
-
 const CustomLabel = (props) => {
   const { x, y, width, value } = props;
   if (value === undefined) return null;
   return (
-    <text x={x + width / 2} y={y - 10} fill={COLORS.slate950} textAnchor="middle" fontSize={10} fontWeight="900">
+    <text x={x + width / 2} y={y - 10} fill={BRAND.dark} textAnchor="middle" fontSize={10} fontWeight="900">
       {`${value.toFixed(1)}%`}
     </text>
   );
@@ -165,11 +153,11 @@ const Card = ({ children, className = "" }) => (
 
 const SectionHeader = ({ num, title, icon: Icon }) => (
   <div className="flex items-center gap-3 mb-10 border-b border-slate-50 pb-4 text-left">
-    <div className="bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0">
+    <div style={{ backgroundColor: BRAND.dark }} className="text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0">
       {num}
     </div>
-    <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase flex items-center gap-2 text-left">
-      {Icon && <Icon size={24} className="text-slate-600" />}
+    <h2 style={{ color: BRAND.dark }} className="text-2xl font-black tracking-tight uppercase flex items-center gap-2 text-left">
+      {Icon && <Icon size={24} style={{ color: BRAND.blue }} />}
       {title}
     </h2>
   </div>
@@ -179,179 +167,112 @@ const App = () => {
   const handlePrint = () => window.print();
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-6 md:p-12 lg:p-16 relative text-left">
+    <div style={{ color: BRAND.dark }} className="min-h-screen bg-slate-50 font-sans p-6 md:p-12 lg:p-16 relative text-left">
       <style dangerouslySetInnerHTML={{ __html: `
         @media print {
-          @page {
-            size: A4;
-            margin: 12mm 10mm;
-          }
-          
-          /* Hide print button */
-          .print-hidden {
-            display: none !important;
-          }
-          
-          /* Force exact colors */
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            color-adjust: exact !important;
-          }
-          
-          /* Clean backgrounds */
-          body {
-            background: white !important;
-            padding: 0 !important;
-            margin: 0 !important;
-          }
-          
-          .bg-slate-50 {
-            background: white !important;
-          }
-          
-          /* Preserve card styling but optimize for print */
-          .shadow-sm {
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
-          }
-          
-          .border {
-            border: 1px solid #e2e8f0 !important;
-          }
-          
-          /* Prevent page breaks inside important elements */
-          .no-break,
-          section,
-          article,
-          .grid > div,
-          table,
-          pre,
-          blockquote {
-            page-break-inside: avoid;
-            break-inside: avoid;
-          }
-          
-          /* Smart page breaks */
-          section {
-            page-break-before: auto;
-            page-break-after: auto;
-          }
-          
-          h1, h2, h3, h4, h5, h6 {
-            page-break-after: avoid;
-            break-after: avoid;
-          }
-          
-          /* Ensure charts render properly */
-          svg {
-            max-width: 100% !important;
-            height: auto !important;
-          }
-          
-          /* Optimize spacing for print */
-          .max-w-\\[1400px\\] {
-            max-width: 100% !important;
-            padding: 0 !important;
-          }
-          
-          /* Make text crisp */
-          body, div, span, p {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-          }
+          @page { size: A4; margin: 12mm 10mm; }
+          .print-hidden { display: none !important; }
+          * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+          body { background: white !important; padding: 0 !important; margin: 0 !important; }
+          .bg-slate-50 { background: white !important; }
+          .no-break, section, article, .grid > div { page-break-inside: avoid; break-inside: avoid; }
         }
       `}} />
 
       <div className="max-w-[1400px] mx-auto text-left">
-        {/* HEADER */}
         <header className="mb-10 flex flex-col md:flex-row justify-between items-start gap-4">
-          <div className="text-left text-left text-left">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#1e3a8a] mb-2 tracking-tight leading-tight text-left">
+          <div>
+            <h1 style={{ color: BRAND.blue }} className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight leading-tight text-left">
               Annual Recruitment Summary 2025
             </h1>
           </div>
           <div className="print-hidden flex flex-col items-end gap-2 text-right">
-            <button onClick={handlePrint} className="bg-blue-900 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-blue-950 shadow-xl transition-all active:scale-95 text-left text-left text-left">
+            <button onClick={handlePrint} style={{ backgroundColor: BRAND.blue }} className="text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-xl transition-all active:scale-95">
               <Printer size={20} /> Save as PDF
             </button>
-            <span className="text-[10px] text-slate-400 font-bold uppercase italic tracking-wider text-right">Enable Background Graphics in Print Dialog</span>
+            <span className="text-[10px] text-slate-400 font-bold uppercase italic tracking-wider">Enable Background Graphics in Print Dialog</span>
           </div>
         </header>
 
-        {/* EXECUTIVE STRATEGIC OUTLOOK */}
         <div className="mb-20">
-          <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-3 text-left">
+          <h2 style={{ color: BRAND.dark }} className="text-xs font-black uppercase tracking-[0.2em] mb-6 flex items-center gap-3 text-left opacity-60">
             <div className="h-[1px] w-8 bg-slate-200"></div>
             Executive Strategic Outlook
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-left text-left">
-            <Card className="border-t-4 border-blue-900 bg-blue-50/20 text-left text-left">
-              <Magnet size={32} className="text-[#1e3a8a] mb-4 text-left text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Brand Maturity: 55%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
+          
+          <div className="mb-10 max-w-4xl">
+            <p style={{ color: BRAND.dark }} className="text-sm leading-relaxed font-normal">
+              In 2025, recruitment activity reflected noticeable changes in sourcing mix and talent profile, while continuing to support business needs across sites and core R&D functions.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-left">
+            <Card className="border-t-4" style={{ borderTopColor: BRAND.blue }}>
+              <Magnet size={32} style={{ color: BRAND.blue }} className="mb-4" />
+              <h3 className="text-base font-black mb-2 uppercase leading-tight">Brand Maturity: 55%</h3>
+              <p className="text-xs font-normal leading-relaxed">
                 Direct applications surged from 35% to 55% year-over-year, demonstrating 
-                accelerated employer brand recognition and strengthened market positioning.
+                accelerated employer brand recognition. This reflects growing candidate awareness and trust in the company, alongside reduced dependency on paid sourcing channels.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-navy-600 bg-slate-50/50 text-left text-left text-left">
-              <HeartHandshake size={32} className="text-navy-600 mb-4 text-left text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight">Internal Advocacy: 34%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
-               1 in 3 hires referred by staff, reflecting strong internal 
-              satisfaction and reduced acquisition costs vs. external channels.
+            <Card className="border-t-4" style={{ borderTopColor: BRAND.dark }}>
+              <HeartHandshake size={32} style={{ color: BRAND.dark }} className="mb-4" />
+              <h3 className="text-base font-black mb-2 uppercase leading-tight">Internal Advocacy: 34%</h3>
+              <p className="text-xs font-normal leading-relaxed">
+               1 in 3 hires referred by staff, reflecting strong internal satisfaction. In addition to cost efficiency, referrals consistently bring candidates with stronger alignment to team culture and role expectations.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-orange-500 bg-slate-50/50 text-left text-left text-left">
-              <Zap size={32} className="text-orange-500 mb-4 text-left text-left text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Gen Z Rise: 28%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
-                Gen Z hiring grew to 28%, bringing technological adaptability and 
-                innovation mindset essential for maintaining competitive technical edge.
+            <Card className="border-t-4" style={{ borderTopColor: BRAND.orange }}>
+              <Zap size={32} style={{ color: BRAND.orange }} className="mb-4" />
+              <h3 className="text-base font-black mb-2 uppercase leading-tight">Gen Z Rise: 28%</h3>
+              <p className="text-xs font-normal leading-relaxed">
+                Gen Z hiring grew to 28%, bringing technological adaptability and innovation. This shift supports long-term pipeline sustainability, while requiring continued investment in onboarding, mentoring, and early-career management.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-emerald-600 bg-slate-50/50 text-left text-left text-left">
-              <GraduationCap size={32} className="text-emerald-600 mb-4 text-left text-left text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left">Top-Tier Focus: 54%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left">
-                Elite university graduates rose to 54%, up from 45%, reflecting 
-                deliberate focus on top-tier academic background.
+            <Card className="border-t-4" style={{ borderTopColor: BRAND.green }}>
+              <SafeGraduationCap size={32} style={{ color: BRAND.green }} className="mb-4" />
+              <h3 className="text-base font-black mb-2 uppercase leading-tight">Top-Tier Focus: 54%</h3>
+              <p className="text-xs font-normal leading-relaxed">
+                Elite university graduates rose to 54%, reflecting deliberate focus on academic quality.
+              </p>
+              <p style={{ color: BRAND.dark }} className="text-[10px] mt-2 italic leading-tight opacity-70">
+                Academic background is one of several hiring considerations and complements, rather than replaces experience, practical skills, and team fit.
               </p>
             </Card>
 
-            <Card className="border-t-4 border-purple-500 bg-slate-50/50 text-left text-left text-left text-left">
-              <Award size={32} className="text-purple-500 mb-4 text-left text-left text-left text-left" />
-              <h3 className="text-base font-bold text-slate-800 mb-2 uppercase leading-tight text-left text-left text-left">Adv. Degrees: 21.3%</h3>
-              <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left">
-                21.3% of recruits hold an advanced degree, strengthening our core research and technical capabilities.
+            <Card className="border-t-4" style={{ borderTopColor: BRAND.purple }}>
+              <Award size={32} style={{ color: BRAND.purple }} className="mb-4" />
+              <h3 className="text-base font-black mb-2 uppercase leading-tight">Adv. Degrees: 21.3%</h3>
+              <p className="text-xs font-normal leading-relaxed">
+                21.3% hold an advanced degree, supporting complex R&D challenges and long-term technical depth in key domains.
               </p>
             </Card>
           </div>
         </div>
 
-        {/* SECTION 01: SOURCING & CHANNELS */}
-        <section className="mb-24 text-left text-left">
+        <section className="mb-24 text-left">
           <SectionHeader num="01" title="Strategic Deployment & Channels" icon={LayoutDashboard} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch text-left text-left text-left text-left">
-            <div className="lg:col-span-8 text-left text-left text-left text-left text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <div className="lg:col-span-8">
               <Card>
-                <div className="flex justify-between items-center mb-8 text-left text-left text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left"><Magnet size={18} className="text-blue-900 text-left text-left"/> Sourcing Breakdown</h3>
+                <div className="flex justify-between items-center mb-8">
+                  <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest"><Magnet size={18} style={{ color: BRAND.blue }}/> Sourcing Breakdown</h3>
                   <div className="flex gap-4">
-                    <div className="flex items-center gap-1.5 text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left">2025</span></div>
-                    <div className="flex items-center gap-1.5 text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left">2024</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: BRAND.blue }}></div><span className="text-[9px] font-black text-slate-500 uppercase">2025</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-slate-300"></div><span className="text-[9px] font-black text-slate-500 uppercase">2024</span></div>
                   </div>
                 </div>
-                <div className="h-[300px] w-full text-left text-left text-left text-left text-left">
+                <div className="h-[300px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={sourcingData} margin={{ top: 20, bottom: 0 }} barGap={12}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: COLORS.slate950, fontWeight: 700, fontSize: 10}} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: BRAND.dark, fontWeight: 700, fontSize: 10}} />
                       <YAxis hide domain={[0, 100]} />
                       <Tooltip cursor={{fill: '#f8fafc'}} />
-                      <Bar name="2025" dataKey="2025" fill={COLORS.navy} radius={[4, 4, 0, 0]} barSize={45}>
+                      <Bar name="2025" dataKey="2025" fill={BRAND.blue} radius={[4, 4, 0, 0]} barSize={45}>
                         <LabelList content={<CustomLabel />} />
                       </Bar>
                       <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={45}>
@@ -363,129 +284,114 @@ const App = () => {
               </Card>
             </div>
             
-            <div className="lg:col-span-4 text-left text-left text-left text-left">
-              <Card className="bg-slate-100 border-none text-slate-950 text-left text-left text-left">
-                <div className="flex items-center gap-3 mb-6 text-left text-left text-left">
-                  <HeartHandshake className="text-blue-900 text-left text-left" size={24} />
-                  <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left text-left">Internal Branding</h4>
+            <div className="lg:col-span-4">
+              <Card className="bg-slate-100 border-none">
+                <div className="flex items-center gap-3 mb-6">
+                  <HeartHandshake style={{ color: BRAND.blue }} size={24} />
+                  <h4 className="text-sm font-black uppercase tracking-widest">Internal Branding</h4>
                 </div>
-                <div className="space-y-6 text-left text-left text-left text-left text-left">
-                  <div>
-                    <p className="text-xs leading-relaxed font-normal text-slate-950 text-left text-left text-left">
-                    Employee referrals represent 34% of total hires, the second largest source behind direct applications. High referral rates typically correlate with strong internal satisfaction and workplace advocacy.
-                    </p>
-                  </div>
-                  </div>
+                <p className="text-xs leading-relaxed font-normal">
+                  Employee referrals represent 34% of total hires, indicating high internal advocacy. This channel continues to serve as a strategic asset and will remain a focus area in our recruitment approach.
+                </p>
               </Card>
             </div>
           </div>
         </section>
-                  
-        {/* SECTION 02: ALLOCATION & DEMOGRAPHICS */}
-        <section className="mb-24 text-left text-left text-left text-left">
+
+        <section className="mb-24 text-left">
           <SectionHeader num="02" title="ORGANIZATIONAL ALLOCATION & DEMOGRAPHICS" icon={Target} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left text-left text-left">
-            
-            <div className="lg:col-span-7 text-left text-left text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-7">
               <Card>
-                <div className="flex justify-between items-center mb-8 text-left text-left text-left text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left"><Target size={18} className="text-blue-900 text-left text-left"/> ORGANIZATIONAL ALLOCATION</h3>
-                  <div className="flex gap-4">
-                    <div className="flex items-center gap-1.5 text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left">2025</span></div>
-                    <div className="flex items-center gap-1.5 text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left">2024</span></div>
-                  </div>
+                <div className="flex justify-between items-center mb-8">
+                  <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest"><Target size={18} style={{ color: BRAND.blue }}/> ALLOCATION</h3>
+                  <div className="flex gap-4 text-[9px] font-black text-slate-500">2025/2024</div>
                 </div>
-                <div className="h-[250px] w-full text-left text-left text-left text-left">
+                <div className="h-[250px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={allocationData} margin={{ top: 20, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: COLORS.slate950, fontWeight: 700, fontSize: 10}} />
+                      <XAxis dataKey="name" tick={{fill: BRAND.dark, fontSize: 10, fontWeight: 700}} />
                       <YAxis hide domain={[0, 100]} />
-                      <Bar name="2025" dataKey="2025" fill={COLORS.navy} radius={[4, 4, 0, 0]} barSize={40}>
-                        <LabelList content={<CustomLabel />} />
-                      </Bar>
-                      <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={40}>
-                        <LabelList content={<CustomLabel />} />
-                      </Bar>
+                      <Bar dataKey="2025" fill={BRAND.blue} barSize={40}><LabelList content={<CustomLabel />} /></Bar>
+                      <Bar dataKey="2024" fill="#cbd5e1" barSize={40}><LabelList content={<CustomLabel />} /></Bar>
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
+                <p className="mt-6 text-[11px] font-normal leading-relaxed italic border-l-2 pl-3" style={{ borderColor: BRAND.blue }}>
+                  Hiring allocation continues to reflect a strong prioritization of core R&D roles, in line with product, technology, and business priorities.
+                </p>
               </Card>
             </div>
 
-            <div className="lg:col-span-5 text-left text-left text-left text-left">
-              <Card className="bg-slate-50 text-left text-left text-left">
-                <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest mb-6 text-left text-left text-left text-left"><PieIcon size={18} className="text-orange-500 text-left text-left"/> R&D Unit Split (2025)</h3>
-                <div className="h-[200px] w-full text-left text-left text-left text-left">
-                  <ResponsiveContainer width="100%" height="100%">
+            <div className="lg:col-span-5">
+              <Card className="bg-slate-50">
+                <h3 className="text-sm font-black flex items-center gap-2 mb-6 uppercase tracking-widest"><PieIcon size={18} style={{ color: BRAND.orange }}/> R&D Unit Split</h3>
+                <div className="h-[200px]">
+                  <ResponsiveContainer>
                     <PieChart>
-                      <Pie data={rdUnitData} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
-                        {rdUnitData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={[COLORS.navy, COLORS.emerald, COLORS.orange][index % 3]} />
-                        ))}
+                      <Pie data={rdUnitData} innerRadius={60} outerRadius={80} dataKey="value">
+                        {[BRAND.blue, BRAND.green, BRAND.orange].map((color, i) => <Cell key={i} fill={color} />)}
                       </Pie>
                       <Tooltip />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="space-y-3 mt-4 text-left text-left text-left text-left">
-                  {rdUnitData.map((unit, i) => (
-                    <div key={i} className="flex justify-between items-center text-xs font-bold text-slate-700 uppercase text-left text-left">
-                      <span>{unit.name}</span>
-                      <span>{unit.value}%</span>
-                    </div>
+                <div className="mt-4 space-y-2">
+                  {rdUnitData.map((u, i) => (
+                    <div key={i} className="flex justify-between text-xs font-black"><span>{u.name}</span><span>{u.value}%</span></div>
                   ))}
                 </div>
               </Card>
             </div>
 
-            <div className="lg:col-span-12 text-left text-left text-left text-left">
+            <div className="lg:col-span-12 text-left">
               <Card>
-                <div className="flex justify-between items-center mb-10 text-left text-left text-left text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left"><History size={18} className="text-blue-900 text-left text-left"/> GENERATIONAL COMPOSITION</h3>
+                <div className="flex justify-between items-center mb-10">
+                  <h3 className="text-sm font-black flex items-center gap-2 uppercase tracking-widest"><History size={18} style={{ color: BRAND.blue }}/> GENERATIONAL COMPOSITION</h3>
                   <div className="flex gap-4">
-                    <div className="flex items-center gap-1.5 text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#1e3a8a]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left">2025</span></div>
-                    <div className="flex items-center gap-1.5 text-left text-left text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left">2024</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: BRAND.blue }}></div><span className="text-[9px] font-black text-slate-500 uppercase">2025</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-slate-300"></div><span className="text-[9px] font-black text-slate-500 uppercase">2024</span></div>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-left text-left text-left text-left">
-                  <div className="h-[220px] w-full text-left text-left text-left text-left text-left">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                  <div className="h-[220px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={genData} layout="vertical" margin={{ left: 20, right: 40 }}>
                         <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
                         <XAxis type="number" hide domain={[0, 70]} />
-                        <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{fill: COLORS.slate950, fontWeight: 700, fontSize: 10}} />
-                        <Bar dataKey="2025" fill={COLORS.navy} radius={[0, 4, 4, 0]} barSize={25}>
-                          <LabelList position="right" formatter={(v) => `${v}%`} style={{fontSize: 10, fontWeight: 900, fill: COLORS.slate950}} />
+                        <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{fill: BRAND.dark, fontWeight: 700, fontSize: 10}} />
+                        <Bar dataKey="2025" fill={BRAND.blue} radius={[0, 4, 4, 0]} barSize={25}>
+                          <LabelList position="right" formatter={(v) => `${v}%`} style={{fontSize: 10, fontWeight: 900, fill: BRAND.dark}} />
                         </Bar>
                         <Bar dataKey="2024" fill="#cbd5e1" radius={[0, 4, 4, 0]} barSize={25}>
-                          <LabelList position="right" formatter={(v) => `${v}%`} style={{fontSize: 10, fontWeight: 900, fill: COLORS.slate400}} />
+                          <LabelList position="right" formatter={(v) => `${v}%`} style={{fontSize: 10, fontWeight: 900, fill: BRAND.muted}} />
                         </Bar>
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
 
-                  <div className="flex flex-col justify-center space-y-6 text-left text-left text-left text-left text-left">
-                    <div className="flex gap-4 items-start text-left text-left">
-                      <div className="p-2 bg-blue-50 rounded-lg text-blue-900 shrink-0"><Smartphone size={20} /></div>
-                      <div className="text-left text-left text-left text-left">
-                        <span className="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-1 text-left text-left">Gen Z (1997-2012) • 28%</span>
-                        <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left">Growing Gen Z presence (28%) drives technology adoption and innovation capacity while extending pipeline sustainability.</p>
+                  <div className="flex flex-col justify-center space-y-6">
+                    <div className="flex gap-4 items-start">
+                      <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: BRAND.lightGray, color: BRAND.blue }}><Smartphone size={20} /></div>
+                      <div>
+                        <span className="block text-[11px] font-black uppercase tracking-wider mb-1" style={{ color: BRAND.muted }}>GEN Z (28%)</span>
+                        <p className="text-xs font-normal leading-relaxed">Growing Gen Z representation supports long-term talent sustainability and early adoption of new technologies.</p>
                       </div>
                     </div>
-                    <div className="flex gap-4 items-start text-left text-left text-left">
-                      <div className="p-2 bg-emerald-50 rounded-lg text-emerald-700 shrink-0 text-left text-left"><Users size={20} /></div>
-                      <div className="text-left text-left text-left text-left text-left">
-                        <span className="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-1 text-left text-left">Millennials (1981-1996) • 48.7%</span>
-                        <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left">Our largest cohort, providing critical organizational stability and leadership potential.</p>
+                    <div className="flex gap-4 items-start">
+                      <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: BRAND.lightGray, color: BRAND.green }}><Users size={20} /></div>
+                      <div>
+                        <span className="block text-[11px] font-black uppercase tracking-wider mb-1" style={{ color: BRAND.muted }}>MILLENNIALS (48.7%)</span>
+                        <p className="text-xs font-normal leading-relaxed">The largest cohort, forming the backbone of team leadership, execution, and delivery.</p>
                       </div>
                     </div>
-                    <div className="flex gap-4 items-start text-left text-left text-left text-left text-left">
-                      <div className="p-2 bg-orange-50 rounded-lg text-orange-600 shrink-0 text-left text-left text-left"><Briefcase size={20} /></div>
-                      <div className="text-left text-left text-left text-left text-left">
-                        <span className="block text-[11px] font-black text-slate-400 uppercase tracking-wider mb-1 text-left text-left text-left">Gen X (1965-1980) • 23.3%</span>
-                        <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left">Offering deep technical expertise and high-level institutional knowledge across R&D.</p>
+                    <div className="flex gap-4 items-start">
+                      <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: BRAND.lightGray, color: BRAND.orange }}><Briefcase size={20} /></div>
+                      <div>
+                        <span className="block text-[11px] font-black uppercase tracking-wider mb-1" style={{ color: BRAND.muted }}>GEN X (23.3%)</span>
+                        <p className="text-xs font-normal leading-relaxed">Bringing deep domain expertise and institutional knowledge across R&D functions.</p>
                       </div>
                     </div>
                   </div>
@@ -495,165 +401,172 @@ const App = () => {
           </div>
         </section>
 
-        {/* SECTION 03: QUALITY & DNA */}
-        <section className="mb-24 text-left text-left text-left text-left">
+        <section className="mb-24 text-left">
           <SectionHeader num="03" title="Talent Quality & DNA" icon={Award} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 text-left text-left text-left text-left">
-            <div className="lg:col-span-8 text-left text-left text-left text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-8">
               <Card>
-                <div className="flex justify-between items-center mb-8 text-left text-left text-left text-left">
-                  <h3 className="text-sm font-black flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left"><GraduationCap size={18} className="text-emerald-700 text-left text-left text-left text-left"/> ACADEMIC BACKGROUND</h3>
-                  <div className="flex gap-4 text-left text-left text-left">
-                    <div className="flex items-center gap-1.5 text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#0d9488]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left text-left">2025</span></div>
-                    <div className="flex items-center gap-1.5 text-left text-left text-left text-left"><div className="w-2.5 h-2.5 rounded-full bg-[#cbd5e1]"></div><span className="text-[9px] font-black text-slate-500 uppercase text-left text-left text-left text-left text-left">2024</span></div>
-                  </div>
-                </div>
-                <div className="h-[280px] w-full text-left text-left text-left text-left text-left">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={eduData} margin={{ top: 20, bottom: 0 }} barGap={12}>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: COLORS.slate950, fontWeight: 700, fontSize: 10}} />
-                      <YAxis hide domain={[0, 100]} />
-                      <Bar name="2025" dataKey="2025" fill={COLORS.emerald} radius={[4, 4, 0, 0]} barSize={35}>
-                        <LabelList content={<CustomLabel />} />
-                      </Bar>
-                      <Bar name="2024" dataKey="2024" fill="#cbd5e1" radius={[4, 4, 0, 0]} barSize={35}>
-                        <LabelList content={<CustomLabel />} />
-                      </Bar>
+                <h3 className="text-sm font-black mb-8 uppercase tracking-widest">Academic Background</h3>
+                <div className="h-[280px]">
+                  <ResponsiveContainer>
+                    <BarChart data={eduData}>
+                      <XAxis dataKey="name" tick={{fontSize: 9, fontWeight: 700, fill: BRAND.dark}} />
+                      <YAxis hide />
+                      <Bar dataKey="2025" fill={BRAND.green} barSize={35}><LabelList content={<CustomLabel />} /></Bar>
+                      <Bar dataKey="2024" fill="#cbd5e1" barSize={35}><LabelList content={<CustomLabel />} /></Bar>
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
+                <p className="mt-6 text-[11px] font-normal leading-relaxed italic border-l-2 pl-3" style={{ borderColor: BRAND.green }}>
+                  The overall academic profile reflects a quality-focused hiring approach, while maintaining flexibility and avoiding unnecessary narrowing of the talent pool.
+                </p>
               </Card>
             </div>
-
-            <div className="lg:col-span-4 flex flex-col gap-6 text-left text-left text-left text-left">
-              <Card className="bg-slate-100 border-none text-slate-950 text-left text-left text-left text-left">
-                <h4 className="text-xs font-black text-slate-950 uppercase tracking-widest mb-6 flex items-center gap-2 text-left text-left text-left text-left text-left"><Star size={14} className="text-orange-500 text-left text-left text-left text-left text-left" /> Top Institutions 2025</h4>
-                <div className="space-y-4 mb-6 text-left text-left text-left text-left text-left text-left">
-                  {top3_2025.map((uni, i) => (
-                    <div key={i} className="flex justify-between items-center p-3 bg-white rounded-xl border border-slate-100 text-left text-left text-left">
-                      <span className="text-xs font-black text-slate-800 uppercase text-left text-left text-left text-left text-left text-left">{i+1}. {uni.name}</span>
-                      <span className="text-xs font-black text-blue-900 text-left text-left text-left text-left text-left text-left text-left">{uni.value}%</span>
-                    </div>
-                  ))}
-                </div>
+            <div className="lg:col-span-4">
+              <Card className="bg-slate-100 border-none">
+                <h4 className="text-xs font-black uppercase mb-6 flex items-center gap-2"><Star size={14} style={{ color: BRAND.orange }} /> Top Institutions</h4>
+                {top3_2025.map((u, i) => (
+                  <div key={i} className="flex justify-between p-3 bg-white mb-2 rounded-xl border border-slate-100 text-xs font-black">
+                    <span>{i+1}. {u.name}</span><span style={{ color: BRAND.blue }}>{u.value}%</span>
+                  </div>
+                ))}
               </Card>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-left text-left text-left text-left">
-            <Card className="text-left text-left text-left text-left text-left">
-              <h3 className="text-sm font-black mb-8 flex items-center gap-2 text-slate-800 uppercase tracking-widest text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><History size={18} className="text-blue-900 text-left text-left text-left text-left"/> EXPERIENCE LEVELS (2025)</h3>
-              <div className="space-y-6 text-left text-left text-left text-left text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+            <Card>
+              <h3 className="text-sm font-black mb-8 flex items-center gap-2 uppercase tracking-widest"><History size={18} style={{ color: BRAND.blue }}/> EXPERIENCE LEVELS (2025)</h3>
+              <div className="space-y-6">
                 {seniorityStats.map((item, idx) => (
-                  <div key={idx} className="space-y-2 text-left text-left text-left text-left text-left text-left">
-                    <div className="flex justify-between text-[10px] font-bold text-slate-700 uppercase text-left text-left text-left text-left text-left">
+                  <div key={idx} className="space-y-2">
+                    <div className="flex justify-between text-[10px] font-black uppercase">
                       <span>{item.label}</span>
                       <span>{item.value.toFixed(1)}%</span>
                     </div>
-                    <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden text-left text-left text-left text-left text-left">
-                      <div className="h-full rounded-full transition-all duration-1000 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left" style={{ width: `${item.value}%`, backgroundColor: item.color }} />
+                    <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${item.value}%`, backgroundColor: item.color }} />
                     </div>
                   </div>
                 ))}
               </div>
+              <p className="mt-8 text-[11px] font-normal leading-relaxed italic border-l-2 pl-3" style={{ borderColor: BRAND.blue }}>
+                The experience mix supports both immediate delivery needs and long-term capability development across teams.
+              </p>
             </Card>
 
-            <Card className="bg-slate-100 border-none text-slate-950 text-left text-left text-left text-left">
-              <div className="flex items-center gap-3 mb-6 text-left text-left text-left text-left text-left">
-                <ShieldCheck className="text-blue-900 text-left text-left text-left text-left text-left text-left" size={24} />
-                <h4 className="text-sm font-black uppercase tracking-widest text-slate-950 text-left text-left text-left text-left text-left">SENIORITY RATIO</h4>
+            <Card className="bg-slate-100 border-none">
+              <div className="flex items-center gap-3 mb-6">
+                <ShieldCheck style={{ color: BRAND.blue }} size={24} />
+                <h4 className="text-sm font-black uppercase tracking-widest">SENIORITY RATIO</h4>
               </div>
-              <div className="space-y-6 text-left text-left text-left text-left text-left">
-                <div className="flex gap-4 text-left text-left text-left text-left text-left">
-                  <span className="text-5xl font-black text-blue-900 text-left text-left text-left text-left text-left">1.85:1</span>
-                  <div className="text-left text-left text-left text-left text-left text-left text-left text-left">
-                    <p className="text-xs text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left">
-                      We onboarded 1.85 experienced professionals (5+ yr) for every junior entry (0-2 yr), maintaining balanced experience distribution across technical teams.
-                    </p>
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <span className="text-5xl font-black" style={{ color: BRAND.blue }}>1.85:1</span>
+                  <div className="flex flex-col justify-center space-y-3">
+                    <div className="flex items-start gap-2">
+                      <div className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: BRAND.blue }} />
+                      <p className="text-xs font-normal leading-relaxed">
+                        We onboarded 1.85 experienced professionals (5+ yr) for every junior entry (0-2 yr), maintaining balanced experience distribution across technical teams.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: BRAND.blue }} />
+                      <p className="text-xs font-normal leading-relaxed">
+                        This balance enables effective knowledge transfer within teams while preserving a healthy and sustainable talent pipeline.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="pt-6 border-t border-slate-300 text-left text-left text-left text-left text-left">
                 </div>
               </div>
             </Card>
           </div>
         </section>
 
-        {/* SECTION 04: SITE METRICS BREAKDOWN (FULLY VERIFIED) */}
-        <section className="mb-24 text-left text-left text-left text-left">
+        <section className="mb-24 text-left">
           <SectionHeader num="04" title="Site Metrics Comparison" icon={MapPin} />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-10 text-left text-left text-left text-left text-left">
-            <Card className="border-t-4 border-[#1e3a8a] text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-              <h4 className="text-xl font-black text-[#1e3a8a] mb-6 uppercase flex justify-between items-center text-left text-left text-left text-left text-left text-left text-left">Kfar Saba Site <Building2 size={20}/></h4>
-              <table className="w-full text-sm text-left font-medium text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-                <thead>
-                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left text-left text-left text-left text-left text-left">
-                    <th className="pb-3 text-left text-left text-left text-left text-left">Metric</th>
-                    <th className="pb-3 text-right text-right text-right text-right">2025 Perf.</th>
-                    <th className="pb-3 text-right opacity-70 text-right text-right text-right">2024 Base</th>
-                  </tr>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+            <Card className="border-t-4" style={{ borderTopColor: BRAND.blue }}>
+              <h4 className="text-xl font-black mb-6 uppercase flex justify-between items-center" style={{ color: BRAND.blue }}>Kfar Saba <Building2 size={20}/></h4>
+              <table className="w-full text-xs text-left font-bold">
+                <thead className="text-[10px] uppercase border-b" style={{ color: BRAND.muted }}>
+                  <tr><th className="pb-3">Metric</th><th className="pb-3 text-right">2025</th><th className="pb-3 text-right">2024</th></tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50 text-left text-left text-left text-left text-left">
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right">66.3%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">77.3%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right">36.7</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">38.3</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left">SENIOR & EXPERT (5+ yr)</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">67.2%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-blue-900 text-right text-right text-right text-right text-right text-left text-left">56.6%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-left text-left">51.8%</td></tr>
+                <tbody className="divide-y">
+                  <tr><td className="py-3">Hires (Allocation)</td><td className="text-right font-black" style={{ color: BRAND.blue }}>66.3%</td><td className="text-right opacity-70">77.3%</td></tr>
+                  <tr><td className="py-3">Senior & Expert (5+ yr)</td><td className="text-right font-black" style={{ color: BRAND.blue }}>56.6%</td><td className="text-right opacity-70">67.2%</td></tr>
+                  <tr><td className="py-3">Top-Tier Graduates</td><td className="text-right font-black" style={{ color: BRAND.blue }}>56.6%</td><td className="text-right opacity-70">51.8%</td></tr>
                 </tbody>
               </table>
             </Card>
 
-            <Card className="border-t-4 border-emerald-600 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-              <h4 className="text-xl font-black text-emerald-700 mb-6 uppercase flex justify-between items-center text-left text-left text-left text-left text-left text-left text-left text-left text-left">North Hub <MapPin size={20}/></h4>
-              <table className="w-full text-sm text-left font-medium text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-                <thead>
-                  <tr className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-left text-left text-left text-left text-left text-left text-left text-left">
-                    <th className="pb-3 text-left text-left text-left text-left text-left">Metric</th>
-                    <th className="pb-3 text-right text-right text-right text-right text-right">2025 Perf.</th>
-                    <th className="pb-3 text-right opacity-70 text-right text-right text-right">2024 Base</th>
-                  </tr>
+            <Card className="border-t-4" style={{ borderTopColor: BRAND.green }}>
+              <h4 className="text-xl font-black mb-6 uppercase flex justify-between items-center" style={{ color: BRAND.green }}>North Hub <MapPin size={20}/></h4>
+              <table className="w-full text-xs text-left font-bold">
+                <thead className="text-[10px] uppercase border-b" style={{ color: BRAND.muted }}>
+                  <tr><th className="pb-3">Metric</th><th className="pb-3 text-right">2025</th><th className="pb-3 text-right">2024</th></tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50 text-left text-left text-left text-left text-left text-left">
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left">Hires (Allocation)</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right">33.7%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">22.7%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left">Average Age</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right">35.7</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right">30.5</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">SENIOR & EXPERT (5+ yr)</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right">51.85%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right">29.4%</td></tr>
-                  <tr><td className="py-3 text-[11px] uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">Top-Tier Graduates</td><td className="py-3 text-right font-black text-emerald-700 text-right text-right text-right text-right text-right text-right text-right">48.1%</td><td className="py-3 text-right opacity-70 font-bold text-right text-right text-right text-right text-right text-right text-right text-left text-left">23.5%</td></tr>
+                <tbody className="divide-y">
+                  <tr><td className="py-3">Hires (Allocation)</td><td className="text-right font-black" style={{ color: BRAND.green }}>33.7%</td><td className="text-right opacity-70">22.7%</td></tr>
+                  <tr><td className="py-3">Senior & Expert (5+ yr)</td><td className="text-right font-black" style={{ color: BRAND.green }}>51.85%</td><td className="text-right opacity-70">29.4%</td></tr>
+                  <tr><td className="py-3">Top-Tier Graduates</td><td className="text-right font-black" style={{ color: BRAND.green }}>48.1%</td><td className="text-right opacity-70">23.5%</td></tr>
                 </tbody>
               </table>
             </Card>
           </div>
-
-          <div className="text-left text-left text-left text-left text-left text-left text-left text-left">
-            {hubInsights.map((insight, idx) => (
-              <div key={insight.title} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-                <h5 className="font-black text-slate-800 text-xs uppercase mb-4 text-left text-left text-left text-left text-left text-left text-left text-left">{insight.title}</h5>
-                {insight.details ? (
-                  <div className="space-y-4">
-                    {insight.details.map((para, i) => (
-                      <div key={i} className="flex gap-4 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-                        <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 shrink-0 text-left text-left text-left text-left text-left text-left text-left text-left text-left"><Info size={18} /></div>
-                        <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left">{para}</p>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="flex gap-4 text-left text-left text-left text-left text-left text-left text-left text-left text-left">
-                    <div className="bg-blue-900/10 p-2 h-fit rounded-lg text-blue-900 shrink-0 text-left text-left text-left text-left text-left text-left text-left text-left text-left"><Info size={18} /></div>
-                    <p className="text-[11px] text-slate-950 font-normal leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left">{insight.detail}</p>
-                  </div>
-                )}
-              </div>
-            ))}
+          <div className="bg-white p-6 rounded-2xl border shadow-sm">
+             <h5 className="font-black text-xs uppercase mb-4">North Hub Growth & Maturation</h5>
+             {hubInsights[0].details.map((p, i) => (
+               <div key={i} className="flex gap-4 mb-4">
+                 <div className="p-2 h-fit rounded-lg" style={{ backgroundColor: BRAND.lightGray, color: BRAND.blue }}><Info size={18} /></div>
+                 <p className="text-[11px] font-normal leading-relaxed">{p}</p>
+               </div>
+             ))}
+             
+             <div className="mt-6 pt-6 border-t border-slate-100">
+                <h6 className="font-black text-[10px] uppercase mb-2" style={{ color: BRAND.muted }}>What this enables</h6>
+                <p className="text-[11px] leading-relaxed font-normal">
+                  The continued maturation of the North hub enables greater operational independence, reduces load on the central site, and supports future growth without compromising seniority or talent quality.
+                </p>
+             </div>
           </div>
         </section>
 
-        {/* FOOTER */}
-        <footer className="border-t border-slate-100 pt-8 pb-10 flex justify-between items-center text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] text-left text-left text-left text-left text-left text-left text-left text-left">
+        {/* LOOKING AHEAD 2026 - ACTIONABLE FOCUS */}
+        <div className="mb-20">
+          <Card className="border-none overflow-hidden relative shadow-lg" style={{ backgroundColor: BRAND.lightGray }}>
+            <div className="absolute top-0 right-0 p-8 opacity-5">
+              <Target size={140} style={{ color: BRAND.blue }} />
+            </div>
+            <div className="relative z-10">
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] mb-8 flex items-center gap-3" style={{ color: BRAND.blue }}>
+                <TrendingUp size={16} /> Looking Ahead – 2026
+              </h2>
+              <div className="space-y-4">
+                {[
+                  "Continued attention to employer brand impact and referral-driven hiring, reflecting trends observed in 2025",
+                  "Maintaining talent quality while supporting planned business growth",
+                  "Ongoing attention to early-career retention and manager enablement"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: BRAND.blue }} />
+                    <p className="text-sm font-normal tracking-tight" style={{ color: BRAND.dark }}>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        <footer className="border-t pt-8 pb-10 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: BRAND.muted }}>
           <span>Israel Recruitment Intelligence • Strategic Talent Overview</span>
         </footer>
       </div>
     </div>
   );
 };
+
+// Internal icon wrapper to ensure graduation cap behaves correctly
+const SafeGraduationCap = (props) => <GraduationCap {...props} />;
 
 export default App;
