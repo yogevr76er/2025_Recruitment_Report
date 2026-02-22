@@ -487,7 +487,7 @@ const App = () => {
           <SectionHeader num="04" title="Site Metrics Comparison" icon={MapPin} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 no-break text-left text-left text-left text-left text-left text-left text-left text-left text-left">
             {[
-              { title: 'Kfar Saba', icon: MapPin, color: BRAND.blue, data: [66.3, 77.3, 64.2, 67.2, 56.6, 51.8] },
+              { title: 'Kfar Saba', icon: MapPin, color: BRAND.blue, data: [66.3, 77.3, 58.5, 67.2, 56.6, 51.8] },
               { title: 'North Hub', icon: MapPin, color: BRAND.green, data: [33.7, 22.7, 51.85, 29.4, 48.1, 23.5] }
             ].map((site, sIdx) => (
               <Card key={sIdx} className="p-5 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left" style={{ borderTop: `3px solid ${site.color}` }}>
